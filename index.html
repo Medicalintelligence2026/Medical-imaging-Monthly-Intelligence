@@ -19,6 +19,62 @@
         .card-desc { font-size: 0.875rem; color: #5c6478; margin: 0; }
     </style>
 </head>
+    <div id="footer-container"></div>
+
+<script>
+fetch('./footer.html')
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(html) {
+    document.getElementById('footer-container').innerHTML = html;
+    setupGoatCounter();
+  });
+
+function setupGoatCounter() {
+  if (!window.goatcounter) {
+    window.goatcounter = {
+      path: function(p) { return location.pathname.replace(/\/$/, '') || '/'; }
+    };
+  }
+
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://gc.zgo.at/count.js';
+  script.setAttribute('data-goatcounter', 'https://medicalintelligence2026.goatcounter.com/count');
+  script.onload = function() {
+    loadVisitCount();
+  };
+  document.body.appendChild(script);
+
+  setTimeout(function() {
+    loadVisitCount();
+  }, 1500);
+}
+
+function loadVisitCount() {
+  var el = document.getElementById('page-views');
+  if (!el) return;
+
+  var path = location.pathname.replace(/\/$/, '');
+  if (!path) path = '/';
+
+  fetch('https://medicalintelligence2026.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
+    .then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function(data) {
+      var n = 0;
+      if (typeof data.count_unique === 'number') n = data.count_unique;
+      else if (typeof data.count === 'number') n = data.count;
+      el.textContent = n + ' 次';
+    })
+    .catch(function() {
+      el.textContent = '暂不可用';
+    });
+}
+</script>
 <body>
     <div class="container">
         <div class="header">
