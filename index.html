@@ -1,114 +1,208 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>医学影像前沿研究精选看板</title>
-    <style>
-        :root { --primary: #1a56db; --bg: #f4f6fa; --surface: #ffffff; --text: #1a2033; --border: #dde2ec; }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 40px 20px; line-height: 1.6; }
-        .container { max-width: 900px; margin: 0 auto; }
-        .header { text-align: center; margin-bottom: 50px; border-bottom: 2px solid var(--primary); padding-bottom: 20px; }
-        .header h1 { font-size: 2rem; margin: 0 0 10px 0; color: var(--primary); }
-        .header p { color: #5c6478; margin: 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; display: block; }
-        .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26, 32, 51, 0.08); border-color: var(--primary); }
-        .card-title { font-size: 1.25rem; font-weight: 700; margin: 0 0 10px 0; display: flex; justify-content: space-between; }
-        .card-title span { color: var(--primary); }
-        .card-desc { font-size: 0.875rem; color: #5c6478; margin: 0; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>医学影像前沿研究精选看板</title>
+  <style>
+    :root {
+      --primary: #1a56db;
+      --bg: #f4f6fa;
+      --surface: #ffffff;
+      --text: #1a2033;
+      --border: #dde2ec;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 40px 20px 0 20px;
+      box-sizing: border-box;
+    }
+
+    .page-main {
+      flex: 1;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 20px;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      margin: 0 0 10px 0;
+      color: var(--primary);
+    }
+
+    .header p {
+      color: #5c6478;
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(26, 32, 51, 0.08);
+      border-color: var(--primary);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .card-title span {
+      color: var(--primary);
+    }
+
+    .card-desc {
+      font-size: 0.875rem;
+      color: #5c6478;
+      margin: 0;
+    }
+
+    #footer-container {
+      margin-top: auto;
+      width: 100%;
+    }
+  </style>
 </head>
-   <body>
+<body>
+  <main class="page-main">
     <div class="container">
-        <div class="header">
-            <h1>医学影像前沿文献看板中心</h1>
-            <p>Literature Intelligence Dashboard Hub</p>
-        </div>
-        <div class="grid">
-            <a href="./Chineseauthor/" class="card">
-                <div class="card-title">中国学者影像前沿 <span>→</span></div>
-                <p class="card-desc">专注第一/通讯作者为中国学者的 TOP 影像学期刊文献解读与追踪。</p>
-            </a>
-            <a href="./Radiology/" class="card">
-                <div class="card-title">Radiology 追踪专栏 <span>→</span></div>
-                <p class="card-desc">Radiology 期刊收录逻辑、临床趋势及高影响力文献月度汇总。</p>
-            </a>
-            <a href="./hotspots/" class="card">
-                <div class="card-title">前沿热点追踪 <span>→</span></div>
-                <p class="card-desc">涵盖大语言模型医学应用、影像组学等交叉学科的系统性研究洞察。</p>
-            </a>
-            <a href="./Medical-Research-skills/" class="card" style="grid-column: 1 / -1; border-color: var(--primary);">
-                <div class="card-title">医学研究 AI 技能看板 <span>→</span></div>
-                <p class="card-desc" style="margin-bottom: 10px;">覆盖 550 项 AI 辅助研究技能，含核心功能、适用场景、输入输出参数及底层源码：</p>
-                <div style="font-size: 0.8rem; color: #5c6478; display: flex; flex-wrap: wrap; gap: 15px;">
-                    <span>🔍 证据洞察 (135项)</span>
-                    <span>🧪 方案设计 (60项)</span>
-                    <span>📊 数据分析 (131项)</span>
-                    <span>✍️ 学术写作 (116项)</span>
-                </div>
-            </a>
-     <div id="footer-container"> </div>
+      <div class="header">
+        <h1>医学影像前沿文献看板中心</h1>
+        <p>Literature Intelligence Dashboard Hub</p>
+      </div>
 
-<script>
-fetch('./footer.html')
-  .then(response => response.text())
-  .then(html => {
-    document.getElementById('footer-container').innerHTML = html;
-  });
-</script>
-<div id="footer-container"></div>
+      <div class="grid">
+        <a href="./Chineseauthor/" class="card">
+          <div class="card-title">中国学者影像前沿 <span>→</span></div>
+          <p class="card-desc">专注第一/通讯作者为中国学者的 TOP 影像学期刊文献解读与追踪。</p>
+        </a>
 
-<script>
-function getGoatCounterPath() {
-  var path = location.pathname;
-  if (path.endsWith('/')) {
-    path += 'index.html';
-  }
-  return path;
-}
+        <a href="./Radiology/" class="card">
+          <div class="card-title">Radiology 追踪专栏 <span>→</span></div>
+          <p class="card-desc">Radiology 期刊收录逻辑、临床趋势及高影响力文献月度汇总。</p>
+        </a>
 
-function setupGoatCounter() {
-  if (!window.goatcounter) {
-    window.goatcounter = {
-      path: function() {
-        return getGoatCounterPath();
+        <a href="./hotspots/" class="card">
+          <div class="card-title">前沿热点追踪 <span>→</span></div>
+          <p class="card-desc">涵盖大语言模型医学应用、影像组学等交叉学科的系统性研究洞察。</p>
+        </a>
+
+        <a href="./Medical-Research-skills/" class="card" style="grid-column: 1 / -1; border-color: var(--primary);">
+          <div class="card-title">医学研究 AI 技能看板 <span>→</span></div>
+          <p class="card-desc" style="margin-bottom: 10px;">覆盖 550 项 AI 辅助研究技能，含核心功能、适用场景、输入输出参数及底层源码：</p>
+          <div style="font-size: 0.8rem; color: #5c6478; display: flex; flex-wrap: wrap; gap: 15px;">
+            <span>🔍 证据洞察 (135项)</span>
+            <span>🧪 方案设计 (60项)</span>
+            <span>📊 数据分析 (131项)</span>
+            <span>✍️ 学术写作 (116项)</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script>
+    function getGoatCounterPath() {
+      var path = location.pathname;
+      if (path.endsWith('/')) {
+        path += 'index.html';
       }
-    };
-  }
+      return path;
+    }
 
-  var script = document.createElement('script');
-  script.async = true;
-  script.src = 'https://gc.zgo.at/count.js';
-  script.setAttribute('data-goatcounter', 'https://medicalintelligence2026.goatcounter.com/count');
-  script.onload = function() {
-    setTimeout(loadVisitCount, 1000);
-  };
-  document.body.appendChild(script);
-}
+    function setupGoatCounter() {
+      if (!window.goatcounter) {
+        window.goatcounter = {
+          path: function() {
+            return getGoatCounterPath();
+          }
+        };
+      }
 
-function loadVisitCount() {
-  var el = document.getElementById('page-views');
-  if (!el) return;
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://gc.zgo.at/count.js';
+      script.setAttribute('data-goatcounter', 'https://medicalintelligence2026.goatcounter.com/count');
+      script.onload = function() {
+        setTimeout(loadVisitCount, 1000);
+      };
+      document.body.appendChild(script);
+    }
 
-  var path = getGoatCounterPath();
+    function loadVisitCount() {
+      var el = document.getElementById('page-views');
+      if (!el) return;
 
-  fetch('https://medicalintelligence2026.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
-    .then(function(res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return res.json();
-    })
-    .then(function(data) {
-      var n = 0;
-      if (typeof data.count_unique === 'number') n = data.count_unique;
-      else if (typeof data.count === 'number') n = data.count;
-      el.textContent = n + ' 次';
-    })
-    .catch(function(err) {
-      console.error('GoatCounter read error:', err);
-      el.textContent = '0 次';
-    });
-}
-</script>
-        </body>
+      var path = getGoatCounterPath();
+
+      fetch('https://medicalintelligence2026.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
+        .then(function(res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.json();
+        })
+        .then(function(data) {
+          var n = 0;
+          if (typeof data.count_unique === 'number') n = data.count_unique;
+          else if (typeof data.count === 'number') n = data.count;
+          el.textContent = n + ' 次';
+        })
+        .catch(function(err) {
+          console.error('GoatCounter read error:', err);
+          el.textContent = '0 次';
+        });
+    }
+
+    fetch('./footer.html')
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(html) {
+        document.getElementById('footer-container').innerHTML = html;
+        setupGoatCounter();
+      });
+  </script>
+</body>
 </html>
