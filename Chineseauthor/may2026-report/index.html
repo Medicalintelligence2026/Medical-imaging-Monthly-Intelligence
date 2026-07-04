@@ -251,7 +251,15 @@ document.getElementById('rd').onclick=function(){document.getElementById('sd').v
   initComments();
   initLikes();
   // Load footer
-  fetch('./footer.html').then(function(r){return r.text()}).then(function(d){document.getElementById('gf').innerHTML=d;
+  <div id="footer-container"></div>
+
+<script>
+fetch('../../footer.html')
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById('footer-container').innerHTML = html;
+  });
+</script>
   var v=parseInt(localStorage.getItem('pv')||0)+1;localStorage.setItem('pv',v);
   var el=document.createElement('p');el.style.cssText='margin-top:8px;font-size:11px;color:var(--tf)';
   el.textContent='访问次数：'+v;document.getElementById('gf').appendChild(el);
