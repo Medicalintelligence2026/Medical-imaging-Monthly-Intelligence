@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>医学影像前沿研究精选看板</title>
   <style>
     :root {
@@ -32,6 +32,7 @@
 
     .page-main {
       flex: 1;
+      width: 100%;
     }
 
     .container {
@@ -70,7 +71,7 @@
       padding: 24px;
       text-decoration: none;
       color: inherit;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
       display: block;
     }
 
@@ -86,6 +87,7 @@
       margin: 0 0 10px 0;
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
 
     .card-title span {
@@ -130,7 +132,9 @@
 
         <a href="./Medical-Research-skills/" class="card" style="grid-column: 1 / -1; border-color: var(--primary);">
           <div class="card-title">医学研究 AI 技能看板 <span>→</span></div>
-          <p class="card-desc" style="margin-bottom: 10px;">覆盖 550 项 AI 辅助研究技能，含核心功能、适用场景、输入输出参数及底层源码：</p>
+          <p class="card-desc" style="margin-bottom: 10px;">
+            覆盖 550 项 AI 辅助研究技能，含核心功能、适用场景、输入输出参数及底层源码：
+          </p>
           <div style="font-size: 0.8rem; color: #5c6478; display: flex; flex-wrap: wrap; gap: 15px;">
             <span>🔍 证据洞察 (135项)</span>
             <span>🧪 方案设计 (60项)</span>
@@ -145,21 +149,47 @@
   <div id="footer-container"></div>
 
   <script>
-    function getGoatCounterPath() {
+    function normalizeCurrentPath() {
       var path = location.pathname;
-      if (path.endsWith('/')) {
-        path += 'index.html';
+
+      if (path.endsWith('index.html')) {
+        path = path.replace(/index\.html$/, '');
       }
+
+      path = path.replace(/\/+$/, '');
+
+      if (!path) path = '/';
+
       return path;
+    }
+
+    function getCandidatePaths() {
+      var normalized = normalizeCurrentPath();
+      var candidates = new Set();
+
+      candidates.add(normalized);
+
+      if (normalized === '/') {
+        candidates.add('/index.html');
+      } else {
+        candidates.add(normalized + '/index.html');
+      }
+
+      return Array.from(candidates);
     }
 
     function setupGoatCounter() {
       if (!window.goatcounter) {
         window.goatcounter = {
           path: function() {
-            return getGoatCounterPath();
+            return normalizeCurrentPath();
           }
         };
+      }
+
+      if (document.querySelector('script[data-goatcounter]')) {
+        setTimeout(loadVisitCount, 1000);
+        return;
       }
 
       var script = document.createElement('script');
@@ -172,22 +202,34 @@
       document.body.appendChild(script);
     }
 
-    function loadVisitCount() {
-      var el = document.getElementById('page-views');
-      if (!el) return;
-
-      var path = getGoatCounterPath();
-
-      fetch('https://medicalintelligence2026.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
+    function fetchCount(path) {
+      return fetch('https://medicalintelligence2026.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
         .then(function(res) {
           if (!res.ok) throw new Error('HTTP ' + res.status);
           return res.json();
         })
         .then(function(data) {
-          var n = 0;
-          if (typeof data.count_unique === 'number') n = data.count_unique;
-          else if (typeof data.count === 'number') n = data.count;
-          el.textContent = n + ' 次';
+          if (typeof data.count_unique === 'number') return data.count_unique;
+          if (typeof data.count === 'number') return data.count;
+          return 0;
+        })
+        .catch(function() {
+          return 0;
+        });
+    }
+
+    function loadVisitCount() {
+      var el = document.getElementById('page-views');
+      if (!el) return;
+
+      var paths = getCandidatePaths();
+
+      Promise.all(paths.map(fetchCount))
+        .then(function(counts) {
+          var total = counts.reduce(function(sum, n) {
+            return sum + n;
+          }, 0);
+          el.textContent = total + ' 次';
         })
         .catch(function(err) {
           console.error('GoatCounter read error:', err);
@@ -202,6 +244,9 @@
       .then(function(html) {
         document.getElementById('footer-container').innerHTML = html;
         setupGoatCounter();
+      })
+      .catch(function(err) {
+        console.error('Footer load error:', err);
       });
   </script>
 </body>
