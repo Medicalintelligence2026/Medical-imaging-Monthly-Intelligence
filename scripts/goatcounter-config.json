@@ -2,8 +2,13 @@
   "site": "https://medicalintelligence2026.goatcounter.com",
   "pages": [
     {
-      "key": "home",
-      "path": "/Medical-imaging-Monthly-Intelligence/",
+      "key": "home_root",
+      "path": "/Medical-imaging-Monthly-Intelligence",
+      "title": "医学影像前沿研究精选看板"
+    },
+    {
+      "key": "home_index",
+      "path": "/Medical-imaging-Monthly-Intelligence/index.html",
       "title": "医学影像前沿研究精选看板"
     },
     {
