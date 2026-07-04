@@ -156,20 +156,20 @@
   <script>
     function loadFooter() {
       return fetch('./footer.html', { cache: 'no-store' })
-        .then(function (response) {
+        .then(function(response) {
           if (!response.ok) {
             throw new Error('Footer load failed: ' + response.status);
           }
           return response.text();
         })
-        .then(function (html) {
+        .then(function(html) {
           document.getElementById('footer-container').innerHTML = html;
         });
     }
 
     function setupGoatCounter() {
       window.goatcounter = window.goatcounter || {};
-      window.goatcounter.path = function () {
+      window.goatcounter.path = function() {
         return '/Medical-imaging-Monthly-Intelligence/';
       };
 
@@ -177,7 +177,7 @@
         return Promise.resolve();
       }
 
-      return new Promise(function (resolve, reject) {
+      return new Promise(function(resolve, reject) {
         var script = document.createElement('script');
         script.async = true;
         script.src = 'https://gc.zgo.at/count.js';
@@ -192,9 +192,9 @@
     }
 
     function waitForGoatCounter() {
-      return new Promise(function (resolve, reject) {
+      return new Promise(function(resolve, reject) {
         var tries = 0;
-        var timer = setInterval(function () {
+        var timer = setInterval(function() {
           tries += 1;
 
           if (window.goatcounter && typeof window.goatcounter.get_data === 'function') {
@@ -218,9 +218,9 @@
       var path = '/Medical-imaging-Monthly-Intelligence/';
 
       try {
-        var data = window.goatcounter.get_data();
-        if (data && data.p) {
-          path = data.p;
+        var gcData = window.goatcounter.get_data();
+        if (gcData && gcData.p) {
+          path = gcData.p;
         }
       } catch (e) {
         console.error('Get GoatCounter path failed:', e);
@@ -232,36 +232,44 @@
           '.json',
         { cache: 'no-store' }
       )
-        .then(function (res) {
+        .then(function(res) {
           if (!res.ok) {
             throw new Error('HTTP ' + res.status + ' for ' + path);
           }
           return res.json();
         })
-        .then(function (data) {
-          var count = data.count || '0';
-          el.textContent = count + ' 次';
+        .then(function(data) {
+          var countText = '0';
+
+          if (data && data.count != null) {
+            countText = String(data.count);
+          } else if (data && data.count_unique != null) {
+            countText = String(data.count_unique);
+          }
+
+          el.textContent = countText + ' 次';
 
           console.log('Exact GoatCounter path:', path);
           console.log('Counter payload:', data);
+          console.log('Rendered count:', countText);
         })
-        .catch(function (err) {
+        .catch(function(err) {
           console.error('GoatCounter read error:', err);
           el.textContent = '0 次';
         });
     }
 
     loadFooter()
-      .then(function () {
+      .then(function() {
         return setupGoatCounter();
       })
-      .then(function () {
+      .then(function() {
         return waitForGoatCounter();
       })
-      .then(function () {
+      .then(function() {
         return loadVisitCount();
       })
-      .catch(function (err) {
+      .catch(function(err) {
         console.error(err);
       });
   </script>
