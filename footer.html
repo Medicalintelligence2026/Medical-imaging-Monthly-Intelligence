@@ -1,36 +1,11 @@
-<footer style="margin-top: 48px; padding: 24px 0; border-top: 1px solid #e5e7eb; text-align: center; color: #6b7280; font-size: 14px; line-height: 1.8;">
-  <div style="max-width: 960px; margin: 0 auto; padding: 0 16px;">
-    <div style="margin-bottom: 12px;">
-      免责声明：本资料仅供医疗卫生专业人士用于学术探讨，任何情况下均不构成且不应被解释为医疗产品的广告或推广材料。所述内容不可取代专业医师的医疗评估与指导，亦不得作为临床诊疗之依据。
-    </div>
-    <div style="margin-top: 10px; color: #9ca3af;">
-      本页访问：<span id="page-views">加载中...</span>
-    </div>
+<hr style="margin-top: 48px; border: none; border-top: 1px solid #e5e7eb;">
+
+<div style="text-align: center; color: #6b7280; font-size: 14px; line-height: 1.8; padding: 20px 16px 30px;">
+  <div>
+    免责声明：本资料仅供医疗卫生专业人士用于学术探讨，任何情况下均不构成且不应被解释为医疗产品的广告或推广材料。所述内容不可取代专业医师的医疗评估与指导，亦不得作为临床诊疗之依据。
   </div>
-</footer>
 
-<script>
-(function () {
-  var counterId = "medicalintelligence2026";
-  var el = document.getElementById("page-views");
-  if (!el) return;
-
-  var path = location.pathname.replace(/\/$/, "");
-  if (path === "") path = "/";
-
-  fetch("https://" + counterId + ".goatcounter.com/counter/" + encodeURIComponent(path) + ".json")
-    .then(function (r) {
-      if (!r.ok) throw new Error("counter fetch failed");
-      return r.json();
-    })
-    .then(function (data) {
-      el.textContent = (data.count_unique ?? data.count ?? 0) + " 次";
-    })
-    .catch(function () {
-      el.textContent = "暂不可用";
-    });
-})();
-</script>
-
-<script data-goatcounter="https://medicalintelligence2026.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+  <div style="margin-top: 12px; color: #9ca3af;">
+    本页访问：<span id="page-views">加载中...</span>
+  </div>
+</div>
