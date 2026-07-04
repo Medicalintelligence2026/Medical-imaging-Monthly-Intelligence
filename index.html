@@ -113,5 +113,67 @@ fetch('./footer.html')
     document.getElementById('footer-container').innerHTML = html;
   });
 </script>
-</body>
+<div id="footer-container"></div>
+
+<script>
+fetch('../footer.html')
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(html) {
+    document.getElementById('footer-container').innerHTML = html;
+    setupGoatCounter();
+  });
+
+function getGoatCounterPath() {
+  var path = location.pathname;
+  if (path.endsWith('/')) {
+    path += 'index.html';
+  }
+  return path;
+}
+
+function setupGoatCounter() {
+  if (!window.goatcounter) {
+    window.goatcounter = {
+      path: function() {
+        return getGoatCounterPath();
+      }
+    };
+  }
+
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://gc.zgo.at/count.js';
+  script.setAttribute('data-goatcounter', 'https://medicalintelligence2026.goatcounter.com/count');
+  script.onload = function() {
+    setTimeout(loadVisitCount, 1000);
+  };
+  document.body.appendChild(script);
+}
+
+function loadVisitCount() {
+  var el = document.getElementById('page-views');
+  if (!el) return;
+
+  var path = getGoatCounterPath();
+
+  fetch('https://medicalintelligence2026.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
+    .then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(function(data) {
+      var n = 0;
+      if (typeof data.count_unique === 'number') n = data.count_unique;
+      else if (typeof data.count === 'number') n = data.count;
+      el.textContent = n + ' 次';
+    })
+    .catch(function(err) {
+      console.error('GoatCounter read error:', err);
+      el.textContent = '0 次';
+    });
+}
+</script>
+        </body>
 </html>
