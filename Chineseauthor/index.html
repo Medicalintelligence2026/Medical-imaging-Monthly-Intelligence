@@ -39,16 +39,14 @@
             <a href="/" style="color: #1a56db; text-decoration: none; font-weight: bold;">← 返回看板总大厅</a>
         </div>
         
-        <div id="global-footer"></div>
-    </div>
-    
-    <script>
-        fetch('./footer.html')
-            .then(response => response.text())
-            .then(data => {
-                let footerPlaceholder = document.getElementById('global-footer');
-                if (footerPlaceholder) footerPlaceholder.innerHTML = data;
-            });
-    </script>
+       <div id="footer-container"></div>
+
+<script>
+fetch('../footer.html')
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById('footer-container').innerHTML = html;
+  });
+</script>
 </body>
 </html>
