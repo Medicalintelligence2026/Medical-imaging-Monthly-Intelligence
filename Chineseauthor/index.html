@@ -27,10 +27,10 @@
         </div>
         
         <div class="grid">
-            <a href="/Chineseauthor/june2026-report/" class="card">
+            <a href="./june2026-report/" class="card">
                 <div class="card-title">2026年 6月刊 <span>→</span></div>
             </a>
-            <a href="/Chineseauthor/may2026-report/" class="card">
+            <a href="./may2026-report/" class="card">
                 <div class="card-title">2026年 5月刊 <span>→</span></div>
             </a>
         </div>
@@ -43,7 +43,7 @@
     </div>
     
     <script>
-        fetch('/footer.html')
+        fetch('./footer.html')
             .then(response => response.text())
             .then(data => {
                 let footerPlaceholder = document.getElementById('global-footer');
