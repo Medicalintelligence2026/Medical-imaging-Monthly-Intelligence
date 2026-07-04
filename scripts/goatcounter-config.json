@@ -1,0 +1,30 @@
+{
+  "site": "https://medicalintelligence2026.goatcounter.com",
+  "pages": [
+    {
+      "key": "home",
+      "path": "/Medical-imaging-Monthly-Intelligence/",
+      "title": "医学影像前沿研究精选看板"
+    },
+    {
+      "key": "Chineseauthor",
+      "path": "/Medical-imaging-Monthly-Intelligence/Chineseauthor",
+      "title": "中国学者影像TOP杂志发表分析 - 往期归档"
+    },
+    {
+      "key": "Radiology",
+      "path": "/Medical-imaging-Monthly-Intelligence/Radiology",
+      "title": "Radiology 追踪专栏"
+    },
+    {
+      "key": "hotspots",
+      "path": "/Medical-imaging-Monthly-Intelligence/hotspots",
+      "title": "前沿热点追踪"
+    },
+    {
+      "key": "MedicalResearchSkills",
+      "path": "/Medical-imaging-Monthly-Intelligence/Medical-Research-skills",
+      "title": "医学研究 AI 技能看板"
+    }
+  ]
+}
