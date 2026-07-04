@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>中国学者影像TOP杂志发表分析 - 往期归档</title>
-    <link rel="canonical" href="/Medical-imaging-Monthly-Intelligence/Chineseauthor/">
     <style>
         :root {
             --primary: #1a56db;
@@ -98,12 +97,6 @@
 
         .card-title span {
             color: var(--primary);
-        }
-
-        .card-desc {
-            font-size: 0.875rem;
-            color: #5c6478;
-            margin: 0;
         }
 
         .back-wrap {
@@ -209,21 +202,7 @@
             });
         }
 
-        function loadVisitCount() {
-            var el = document.getElementById('page-views');
-            if (!el) return Promise.resolve();
-
-            var path = '/Medical-imaging-Monthly-Intelligence/Chineseauthor/';
-
-            try {
-                var gcData = window.goatcounter.get_data();
-                if (gcData && gcData.p) {
-                    path = gcData.p;
-                }
-            } catch (e) {
-                console.error('Get GoatCounter path failed:', e);
-            }
-
+        function fetchCount(path) {
             return fetch(
                 'https://medicalintelligence2026.goatcounter.com/counter/' +
                 encodeURIComponent(path) +
@@ -237,19 +216,50 @@
                     return res.json();
                 })
                 .then(function(data) {
-                    var countText = '0';
+                    if (data && data.count != null) return Number(data.count) || 0;
+                    if (data && data.count_unique != null) return Number(data.count_unique) || 0;
+                    return 0;
+                })
+                .catch(function(err) {
+                    console.log('GoatCounter miss:', path, err.message);
+                    return 0;
+                });
+        }
 
-                    if (data && data.count != null) {
-                        countText = String(data.count);
-                    } else if (data && data.count_unique != null) {
-                        countText = String(data.count_unique);
-                    }
+        function loadVisitCount() {
+            var el = document.getElementById('page-views');
+            if (!el) return Promise.resolve();
 
-                    el.textContent = countText + ' 次';
+            var exactPath = '/Medical-imaging-Monthly-Intelligence/Chineseauthor/';
 
-                    console.log('Exact GoatCounter path:', path);
-                    console.log('Counter payload:', data);
-                    console.log('Rendered count:', countText);
+            try {
+                var gcData = window.goatcounter.get_data();
+                if (gcData && gcData.p) {
+                    exactPath = gcData.p;
+                }
+            } catch (e) {
+                console.error('Get GoatCounter path failed:', e);
+            }
+
+            var candidates = Array.from(new Set([
+                exactPath,
+                '/Medical-imaging-Monthly-Intelligence/Chineseauthor/',
+                '/Medical-imaging-Monthly-Intelligence/Chineseauthor',
+                '/Medical-imaging-Monthly-Intelligence/Chineseauthor/index.html'
+            ]));
+
+            return Promise.all(candidates.map(fetchCount))
+                .then(function(counts) {
+                    var total = counts.reduce(function(sum, n) {
+                        return sum + n;
+                    }, 0);
+
+                    el.textContent = total + ' 次';
+
+                    console.log('Exact GoatCounter path:', exactPath);
+                    console.log('Candidate paths:', candidates);
+                    console.log('Counts:', counts);
+                    console.log('Rendered count:', total);
                 })
                 .catch(function(err) {
                     console.error('GoatCounter read error:', err);
