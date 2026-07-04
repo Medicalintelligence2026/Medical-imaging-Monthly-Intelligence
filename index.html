@@ -21,6 +21,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
     }
 
     body {
@@ -153,19 +154,11 @@
   <div id="footer-container"></div>
 
   <script>
-    var SITE_BASE = '/Medical-imaging-Monthly-Intelligence';
-
-    function normalizeBase(base) {
-      return base.replace(/\/+$/, '');
-    }
-
     function loadFooter() {
-      var footerUrl = normalizeBase(SITE_BASE) + '/footer.html';
-
-      return fetch(footerUrl, { cache: 'no-store' })
+      return fetch('./footer.html', { cache: 'no-store' })
         .then(function (response) {
           if (!response.ok) {
-            throw new Error('Footer load failed: ' + response.status + ' ' + footerUrl);
+            throw new Error('Footer load failed: ' + response.status);
           }
           return response.text();
         })
@@ -175,10 +168,9 @@
     }
 
     function setupGoatCounter() {
-      window.goatcounter = {
-        path: function () {
-          return '/Medical-imaging-Monthly-Intelligence/';
-        }
+      window.goatcounter = window.goatcounter || {};
+      window.goatcounter.path = function () {
+        return '/Medical-imaging-Monthly-Intelligence/';
       };
 
       if (document.querySelector('script[data-goatcounter]')) {
@@ -189,53 +181,72 @@
         var script = document.createElement('script');
         script.async = true;
         script.src = 'https://gc.zgo.at/count.js';
-        script.setAttribute('data-goatcounter', 'https://medicalintelligence2026.goatcounter.com/count');
+        script.setAttribute(
+          'data-goatcounter',
+          'https://medicalintelligence2026.goatcounter.com/count'
+        );
         script.onload = resolve;
         script.onerror = reject;
         document.body.appendChild(script);
       });
     }
 
-    function fetchCount(path) {
-      return fetch(
-        'https://medicalintelligence2026.goatcounter.com/counter/' +
-        encodeURIComponent(path) +
-        '.json',
-        { cache: 'no-store' }
-      )
-      .then(function (res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status + ' for ' + path);
-        return res.json();
-      })
-      .then(function (data) {
-        if (typeof data.count === 'number') return data.count;
-        if (typeof data.count_unique === 'number') return data.count_unique;
-        return 0;
-      })
-      .catch(function () {
-        return 0;
+    function waitForGoatCounter() {
+      return new Promise(function (resolve, reject) {
+        var tries = 0;
+        var timer = setInterval(function () {
+          tries += 1;
+
+          if (window.goatcounter && typeof window.goatcounter.get_data === 'function') {
+            clearInterval(timer);
+            resolve();
+            return;
+          }
+
+          if (tries > 50) {
+            clearInterval(timer);
+            reject(new Error('GoatCounter not ready'));
+          }
+        }, 100);
       });
     }
 
     function loadVisitCount() {
       var el = document.getElementById('page-views');
-      if (!el) return;
+      if (!el) return Promise.resolve();
 
-      var paths = [
-        '/Medical-imaging-Monthly-Intelligence/',
-        '/Medical-imaging-Monthly-Intelligence',
-        '/Medical-imaging-Monthly-Intelligence/index.html'
-      ];
+      var path = '/Medical-imaging-Monthly-Intelligence/';
 
-      Promise.all(paths.map(fetchCount))
-        .then(function (counts) {
-          var total = counts.reduce(function (sum, n) {
-            return sum + n;
-          }, 0);
-          el.textContent = total + ' 次';
-          console.log('GoatCounter paths:', paths, counts, total);
+      try {
+        var data = window.goatcounter.get_data();
+        if (data && data.p) {
+          path = data.p;
+        }
+      } catch (e) {
+        console.error('Get GoatCounter path failed:', e);
+      }
+
+      return fetch(
+        'https://medicalintelligence2026.goatcounter.com/counter/' +
+          encodeURIComponent(path) +
+          '.json',
+        { cache: 'no-store' }
+      )
+        .then(function (res) {
+          if (!res.ok) {
+            throw new Error('HTTP ' + res.status + ' for ' + path);
+          }
+          return res.json();
         })
-        .catch(function () {
+        .then(function (data) {
+          var count = data.count || '0';
+          el.textContent = count + ' 次';
+
+          console.log('Exact GoatCounter path:', path);
+          console.log('Counter payload:', data);
+        })
+        .catch(function (err) {
+          console.error('GoatCounter read error:', err);
           el.textContent = '0 次';
         });
     }
@@ -245,7 +256,10 @@
         return setupGoatCounter();
       })
       .then(function () {
-        setTimeout(loadVisitCount, 1200);
+        return waitForGoatCounter();
+      })
+      .then(function () {
+        return loadVisitCount();
       })
       .catch(function (err) {
         console.error(err);
