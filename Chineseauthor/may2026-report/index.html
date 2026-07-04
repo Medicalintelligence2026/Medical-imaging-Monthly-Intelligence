@@ -245,11 +245,7 @@ document.getElementById('search').oninput=function(){sq=this.value.trim().toLowe
 document.getElementById('sd').onchange=applyFilters;document.getElementById('ed').onchange=applyFilters;
 document.getElementById('rd').onclick=function(){document.getElementById('sd').value='';document.getElementById('ed').value='';applyFilters()};
 
-(function init(){
-  document.getElementById('grid').innerHTML=PAPERS.map(buildCard).join('');
-  applyFilters();
-  initComments();
-  initLikes();
+
   // Load footer
   <div id="footer-container"></div>
 
@@ -260,11 +256,7 @@ fetch('../../footer.html')
     document.getElementById('footer-container').innerHTML = html;
   });
 </script>
-  var v=parseInt(localStorage.getItem('pv')||0)+1;localStorage.setItem('pv',v);
-  var el=document.createElement('p');el.style.cssText='margin-top:8px;font-size:11px;color:var(--tf)';
-  el.textContent='访问次数：'+v;document.getElementById('gf').appendChild(el);
-  }).catch(function(){});
-})();
+
 
 // Theme toggle
 (function(){
