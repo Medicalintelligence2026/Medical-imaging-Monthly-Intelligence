@@ -17,7 +17,7 @@ fi
 
 if [ -z "${GOATCOUNTER_TOKEN:-}" ]; then
   echo "Error: GOATCOUNTER_TOKEN is not set." >&2
-  echo "Usage: GOATCOUNTER_TOKEN='medicalimaging2026' bash scripts/fetch-goatcounter-stats.sh" >&2
+  echo "Usage: GOATCOUNTER_TOKEN='your_token' bash scripts/fetch-goatcounter-stats.sh" >&2
   exit 1
 fi
 
