@@ -48,11 +48,14 @@
                     <span>✍️ 学术写作 (116项)</span>
                 </div>
             </a>
-        </div>
-        <div id="global-footer"></div>
-    </div>
-    <script>
-        fetch('./footer.html').then(r => r.text()).then(d => document.getElementById('global-footer').innerHTML = d);
-    </script>
+     <div id="footer-container"> </div>
+
+<script>
+fetch('./footer.html')
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById('footer-container').innerHTML = html;
+  });
+</script>
 </body>
 </html>
