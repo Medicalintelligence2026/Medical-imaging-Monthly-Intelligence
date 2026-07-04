@@ -149,34 +149,33 @@
   <div id="footer-container"></div>
 
   <script>
-    function normalizeCurrentPath() {
-      var path = location.pathname;
+   <script>
+function normalizeCurrentPath() {
+  var path = location.pathname || '/';
+  return path;
+}
 
-      if (path.endsWith('index.html')) {
-        path = path.replace(/index\.html$/, '');
-      }
+   function getCandidatePaths() {
+  var raw = normalizeCurrentPath();
+  var trimmed = raw.replace(/\/+$/, '') || '/';
+  var candidates = new Set();
 
-      path = path.replace(/\/+$/, '');
+  candidates.add(raw);
+  candidates.add(trimmed);
 
-      if (!path) path = '/';
+  if (trimmed === '/') {
+    candidates.add('/index.html');
+  } else {
+    candidates.add(trimmed + '/');
+    candidates.add(trimmed + '/index.html');
+  }
 
-      return path;
-    }
+  if (raw.endsWith('/')) {
+    candidates.add(raw + 'index.html');
+  }
 
-    function getCandidatePaths() {
-      var normalized = normalizeCurrentPath();
-      var candidates = new Set();
-
-      candidates.add(normalized);
-
-      if (normalized === '/') {
-        candidates.add('/index.html');
-      } else {
-        candidates.add(normalized + '/index.html');
-      }
-
-      return Array.from(candidates);
-    }
+  return Array.from(candidates);
+}
 
     function setupGoatCounter() {
       if (!window.goatcounter) {
@@ -203,39 +202,46 @@
     }
 
     function fetchCount(path) {
-      return fetch('https://medicalintelligence2026.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
-        .then(function(res) {
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          return res.json();
-        })
-        .then(function(data) {
-          if (typeof data.count_unique === 'number') return data.count_unique;
-          if (typeof data.count === 'number') return data.count;
-          return 0;
-        })
-        .catch(function() {
-          return 0;
-        });
-    }
+  return fetch('https://medicalintelligence2026.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
+    .then(function(res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status + ' for ' + path);
+      return res.json();
+    })
+    .then(function(data) {
+      if (typeof data.count_unique === 'number') return data.count_unique;
+      if (typeof data.count === 'number') return data.count;
+      return 0;
+    })
+    .catch(function(err) {
+      console.log('GoatCounter miss:', path, err.message);
+      return 0;
+    });
+}
 
-    function loadVisitCount() {
-      var el = document.getElementById('page-views');
-      if (!el) return;
+function loadVisitCount() {
+  var el = document.getElementById('page-views');
+  if (!el) return;
 
-      var paths = getCandidatePaths();
+  var paths = getCandidatePaths();
 
-      Promise.all(paths.map(fetchCount))
-        .then(function(counts) {
-          var total = counts.reduce(function(sum, n) {
-            return sum + n;
-          }, 0);
-          el.textContent = total + ' 次';
-        })
-        .catch(function(err) {
-          console.error('GoatCounter read error:', err);
-          el.textContent = '0 次';
-        });
-    }
+  Promise.all(paths.map(fetchCount))
+    .then(function(counts) {
+      var total = counts.reduce(function(sum, n) {
+        return sum + n;
+      }, 0);
+
+      el.textContent = total + ' 次';
+
+      console.log('Current pathname:', location.pathname);
+      console.log('Candidate paths:', paths);
+      console.log('Counts:', counts);
+      console.log('Total:', total);
+    })
+    .catch(function(err) {
+      console.error('GoatCounter read error:', err);
+      el.textContent = '0 次';
+    });
+}
 
     fetch('./footer.html')
       .then(function(response) {
