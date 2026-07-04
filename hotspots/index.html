@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医学影像领域热点追踪 - 往期归档</title>
+    <style>
+        :root { --primary: #1a56db; --bg: #f4f6fa; --surface: #ffffff; --text: #1a2033; --border: #dde2ec; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 40px 20px; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 50px; border-bottom: 2px solid var(--primary); padding-bottom: 20px; }
+        .header h1 { font-size: 2rem; margin: 0 0 10px 0; color: var(--primary); }
+        .header p { color: #5c6478; margin: 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; display: block; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26, 32, 51, 0.08); border-color: var(--primary); }
+        .card-title { font-size: 1.25rem; font-weight: 700; margin: 0 0 10px 0; display: flex; justify-content: space-between; }
+        .card-title span { color: var(--primary); }
+        .card-desc { font-size: 0.875rem; color: #5c6478; margin: 0; }
+    </style>
+</head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>医学影像领域月度研究热点综述</h1>
+            <h1>医学影像领域热点追踪</h1>
             <p>往期看板归档</p>
         </div>
+        
         <div class="grid">
-            <a href="/hotspots/june2026-report/" class="card">
+            <a href="./june2026-report/" class="card">
                 <div class="card-title">2026年 6月刊 <span>→</span></div>
             </a>
-            <a href="/hotspots/may2026-report/" class="card">
+            <a href="./may2026-report/" class="card">
                 <div class="card-title">2026年 5月刊 <span>→</span></div>
             </a>
-            </div>
+        </div>
         
         <div style="text-align: center; margin-top: 40px;">
-            <a href="/" style="color: #1a56db; text-decoration: none; font-weight: bold;">← 返回看板总大厅</a>
+            <div class="back-link">
+            <a href="/Medical-imaging-Monthly-Intelligence/index.html" style="color: #1a56db; text-decoration: none; font-weight: bold;">← 返回看板总大厅</a>
         </div>
-    </div>
+        
+       <div id="footer-container"></div>
+
+<script>
+fetch('../footer.html')
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById('footer-container').innerHTML = html;
+  });
+</script>
 </body>
 </html>
