@@ -27,28 +27,30 @@
         </div>
         
         <div class="grid">
-            <a href="/Radiology/june2026-report/" class="card">
+            <a href="./Radiology/june2026-report/" class="card">
                 <div class="card-title">2026年 6月刊 <span>→</span></div>
             </a>
-            <a href="/Radiology/may2026-report/" class="card">
+            <a href="./Radiology/may2026-report/" class="card">
                 <div class="card-title">2026年 5月刊 <span>→</span></div>
             </a>
         </div>
         
         <div style="text-align: center; margin-top: 40px;">
-            <a href="/" style="color: #1a56db; text-decoration: none; font-weight: bold;">← 返回看板总大厅</a>
+            <div class="back-link">
+            <a href="/Medical-imaging-Monthly-Intelligence/index.html" style="color: #1a56db; text-decoration: none; font-weight: bold;">← 返回看板总大厅</a>
         </div>
         
         <div id="global-footer"></div>
     </div>
     
-    <script>
-        fetch('/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                let footerPlaceholder = document.getElementById('global-footer');
-                if (footerPlaceholder) footerPlaceholder.innerHTML = data;
-            });
-    </script>
+   <div id="footer-container"></div>
+
+<script>
+fetch('../footer.html')
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById('footer-container').innerHTML = html;
+  });
+</script>
 </body>
 </html>
