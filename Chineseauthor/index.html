@@ -219,16 +219,12 @@
                     if (data && data.count != null) return Number(data.count) || 0;
                     if (data && data.count_unique != null) return Number(data.count_unique) || 0;
                     return 0;
-                })
-                .catch(function(err) {
-                    console.log('GoatCounter miss:', path, err.message);
-                    return 0;
                 });
         }
 
-        function loadVisitCount() {
+        function loadVisitCountOnce() {
             var el = document.getElementById('page-views');
-            if (!el) return Promise.resolve();
+            if (!el) return Promise.resolve(0);
 
             var exactPath = '/Medical-imaging-Monthly-Intelligence/Chineseauthor/';
 
@@ -248,23 +244,56 @@
                 '/Medical-imaging-Monthly-Intelligence/Chineseauthor/index.html'
             ]));
 
-            return Promise.all(candidates.map(fetchCount))
-                .then(function(counts) {
-                    var total = counts.reduce(function(sum, n) {
-                        return sum + n;
-                    }, 0);
-
-                    el.textContent = total + ' 次';
-
-                    console.log('Exact GoatCounter path:', exactPath);
-                    console.log('Candidate paths:', candidates);
-                    console.log('Counts:', counts);
-                    console.log('Rendered count:', total);
+            return Promise.all(
+                candidates.map(function(path) {
+                    return fetchCount(path).catch(function(err) {
+                        console.log('GoatCounter miss:', path, err.message);
+                        return 0;
+                    });
                 })
-                .catch(function(err) {
-                    console.error('GoatCounter read error:', err);
-                    el.textContent = '0 次';
+            )
+            .then(function(counts) {
+                var total = counts.reduce(function(sum, n) {
+                    return sum + n;
+                }, 0);
+
+                el.textContent = total + ' 次';
+
+                console.log('Exact GoatCounter path:', exactPath);
+                console.log('Candidate paths:', candidates);
+                console.log('Counts:', counts);
+                console.log('Rendered count:', total);
+
+                return total;
+            })
+            .catch(function(err) {
+                console.error('GoatCounter read error:', err);
+                el.textContent = '0 次';
+                return 0;
+            });
+        }
+
+        function loadVisitCountWithRetry(maxRetry, delay) {
+            var attempt = 0;
+
+            function run() {
+                attempt += 1;
+                return loadVisitCountOnce().then(function(total) {
+                    if (total > 0 || attempt >= maxRetry) {
+                        return total;
+                    }
+
+                    console.log('Retry reading GoatCounter count... attempt', attempt + 1);
+
+                    return new Promise(function(resolve) {
+                        setTimeout(function() {
+                            resolve(run());
+                        }, delay);
+                    });
                 });
+            }
+
+            return run();
         }
 
         loadFooter()
@@ -275,7 +304,7 @@
                 return waitForGoatCounter();
             })
             .then(function() {
-                return loadVisitCount();
+                return loadVisitCountWithRetry(5, 2000);
             })
             .catch(function(err) {
                 console.error(err);
