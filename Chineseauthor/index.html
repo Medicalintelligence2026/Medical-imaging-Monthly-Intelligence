@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -52,3 +53,246 @@
     </script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国学者影像TOP杂志发表分析 - 往期归档</title>
+    <style>
+        :root {
+            --primary: #1a56db;
+            --bg: #f4f6fa;
+            --surface: #ffffff;
+            --text: #1a2033;
+            --border: #dde2ec;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .page-main {
+            flex: 1;
+            width: 100%;
+            padding: 40px 20px 0 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+            color: var(--primary);
+        }
+
+        .header p {
+            color: #5c6478;
+            margin: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(26, 32, 51, 0.08);
+            border-color: var(--primary);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title span {
+            color: var(--primary);
+        }
+
+        .back-wrap {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .back-link a {
+            color: #1a56db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #footer-container {
+            width: 100%;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <main class="page-main">
+        <div class="container">
+            <div class="header">
+                <h1>中国学者影像TOP杂志发表分析</h1>
+                <p>往期看板归档</p>
+            </div>
+
+            <div class="grid">
+                <a href="./june2026-report/" class="card">
+                    <div class="card-title">2026年 6月刊 <span>→</span></div>
+                </a>
+
+                <a href="./may2026-report/" class="card">
+                    <div class="card-title">2026年 5月刊 <span>→</span></div>
+                </a>
+            </div>
+
+            <div class="back-wrap">
+                <div class="back-link">
+                    <a href="/Medical-imaging-Monthly-Intelligence/index.html">← 返回看板总大厅</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script>
+        // 1) 统一加载 footer.html
+        function loadFooter() {
+            return fetch('../footer.html', { cache: 'no-store' })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Footer load failed: ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(function (html) {
+                    document.getElementById('footer-container').innerHTML = html;
+                });
+        }
+
+        // 2) GoatCounter 只负责记录当前页面访问
+        function setupGoatCounter() {
+            window.goatcounter = window.goatcounter || {};
+            // 这里用当前栏目自己的 path，只影响统计，不影响显示
+            window.goatcounter.path = function () {
+                return '/Medical-imaging-Monthly-Intelligence/Chineseauthor';
+            };
+
+            if (document.querySelector('script[data-goatcounter]')) {
+                return Promise.resolve();
+            }
+
+            return new Promise(function (resolve, reject) {
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://gc.zgo.at/count.js';
+                script.setAttribute(
+                    'data-goatcounter',
+                    'https://medicalintelligence2026.goatcounter.com/count'
+                );
+                script.onload = resolve;
+                script.onerror = reject;
+                document.body.appendChild(script);
+            });
+        }
+
+        // 3) 从首页 path 读取“总访问次数”
+        function loadTotalVisitCount() {
+            var el = document.getElementById('page-views');
+            if (!el) return Promise.resolve();
+
+            // 只读取首页的计数
+            var homePath = '/Medical-imaging-Monthly-Intelligence/';
+
+            return fetch(
+                'https://medicalintelligence2026.goatcounter.com/counter/' +
+                    encodeURIComponent(homePath) +
+                    '.json',
+                { cache: 'no-store' }
+            )
+                .then(function (res) {
+                    if (!res.ok) {
+                        throw new Error('HTTP ' + res.status + ' for ' + homePath);
+                    }
+                    return res.json();
+                })
+                .then(function (data) {
+                    var countText = '0';
+
+                    if (data && data.count != null) {
+                        countText = String(data.count);
+                    } else if (data && data.count_unique != null) {
+                        countText = String(data.count_unique);
+                    }
+
+                    el.textContent = countText + ' 次（总访问）';
+
+                    console.log('Home path for total views:', homePath);
+                    console.log('Home payload:', data);
+                })
+                .catch(function (err) {
+                    console.error('Total views read error:', err);
+                    el.textContent = '0 次';
+                });
+        }
+
+        // 4) 顺序执行：先 footer，再 GoatCounter，再加载总访问次数
+        loadFooter()
+            .then(function () {
+                return setupGoatCounter();
+            })
+            .then(function () {
+                return loadTotalVisitCount();
+            })
+            .catch(function (err) {
+                console.error(err);
+            });
+    </script>
+</body>
+</html>
+>>>>>>> f22e97794074796f23454abe8dcbbb9ce857551a

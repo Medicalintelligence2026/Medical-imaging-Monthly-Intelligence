@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Radiology月度深度分析 - 往期归档</title>
+=======
+    <title>Radiology追踪 - 往期归档</title>
+>>>>>>> f22e97794074796f23454abe8dcbbb9ce857551a
     <style>
         :root { --primary: #1a56db; --bg: #f4f6fa; --surface: #ffffff; --text: #1a2033; --border: #dde2ec; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 40px 20px; line-height: 1.6; }
@@ -22,20 +26,32 @@
 <body>
     <div class="container">
         <div class="header">
+<<<<<<< HEAD
             <h1>Radiology月度深度分析</h1>
+=======
+            <h1>Radiology杂志深度分析</h1>
+>>>>>>> f22e97794074796f23454abe8dcbbb9ce857551a
             <p>往期看板归档</p>
         </div>
         
         <div class="grid">
+<<<<<<< HEAD
             <a href="/Radiology/june2026-report/" class="card">
                 <div class="card-title">2026年 6月刊 <span>→</span></div>
             </a>
             <a href="/Radiology/may2026-report/" class="card">
+=======
+            <a href="./june2026-report/" class="card">
+                <div class="card-title">2026年 6月刊 <span>→</span></div>
+            </a>
+            <a href="./may2026-report/" class="card">
+>>>>>>> f22e97794074796f23454abe8dcbbb9ce857551a
                 <div class="card-title">2026年 5月刊 <span>→</span></div>
             </a>
         </div>
         
         <div style="text-align: center; margin-top: 40px;">
+<<<<<<< HEAD
             <a href="/" style="color: #1a56db; text-decoration: none; font-weight: bold;">← 返回看板总大厅</a>
         </div>
         
@@ -52,3 +68,20 @@
     </script>
 </body>
 </html>
+=======
+            <div class="back-link">
+            <a href="/Medical-imaging-Monthly-Intelligence/index.html" style="color: #1a56db; text-decoration: none; font-weight: bold;">← 返回看板总大厅</a>
+        </div>
+        
+       <div id="footer-container"></div>
+
+<script>
+fetch('../footer.html')
+  .then(response => response.text())
+  .then(html => {
+    document.getElementById('footer-container').innerHTML = html;
+  });
+</script>
+</body>
+</html>
+>>>>>>> f22e97794074796f23454abe8dcbbb9ce857551a

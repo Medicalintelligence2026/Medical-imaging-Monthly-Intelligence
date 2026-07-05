@@ -1,0 +1,3 @@
+GOATCOUNTER_TOKEN="替换成你的token" bash scripts/fetch-goatcounter-stats.sh
+node scripts/build-page-views.mjs
+38f8alxvvwx5ne5si2ppwc1w20tidnz66kr3n1bi3o7uvbg3ia

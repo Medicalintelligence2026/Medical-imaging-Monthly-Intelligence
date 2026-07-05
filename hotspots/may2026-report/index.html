@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -690,3 +691,697 @@ fetch('/hotspots/may2026-report/counter.php')
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>医学影像领域月度研究热点综述 — 2026年5月</title>
+<style>
+  :root {
+    --bg: #f5f3ef; --card: #ffffff; --text: #2c2c2c; --muted: #6b6b6b;
+    --accent: #b22222; --accent2: #1a5276; --border: #e0dcd5;
+    --tag-method: #d4e6f1; --tag-task: #d5f5e3; --tag-modal: #fdebd0;
+    --tag-clinical: #fadbd8; --tag-new: #d5f5e3; --highlight: #fff3cd;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,sans-serif; background:var(--bg); color:var(--text); line-height:1.8; font-size:15px; }
+  a { color:var(--accent2); text-decoration:none; } a:hover { text-decoration:underline; }
+
+  .hero { background:linear-gradient(160deg,#0a1628,#122340 40%,#0d2b4e); color:#fff; padding:52px 32px 44px; text-align:center; position:relative; overflow:hidden; }
+  .hero::before { content:""; position:absolute; top:-60px; right:-60px; width:200px; height:200px; background:radial-gradient(circle,rgba(52,152,219,.12) 0%,transparent 70%); border-radius:50%; }
+  .hero::after { content:""; position:absolute; bottom:-40px; left:10%; width:160px; height:160px; background:radial-gradient(circle,rgba(231,76,60,.08) 0%,transparent 70%); border-radius:50%; }
+  .hero h1 { font-size:32px; font-weight:700; letter-spacing:2px; margin-bottom:6px; position:relative; z-index:1; }
+  .hero h1 .en { display:block; font-size:14px; font-weight:400; letter-spacing:1px; color:#7f9bc0; margin-top:4px; font-family:"SF Pro Display","Inter",-apple-system,sans-serif; }
+  .hero .subtitle { font-size:13px; color:#94a3b8; margin:12px 0 28px; position:relative; z-index:1; }
+  .hero .subtitle span { margin:0 12px; }
+  .hero-stats { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; position:relative; z-index:1; }
+  .hero-stat { text-align:center; } .hero-stat .num { font-size:40px; font-weight:800; color:#e8edf2; line-height:1.1; }
+  .hero-stat .label { font-size:12px; color:#7f9bc0; text-transform:uppercase; letter-spacing:2px; margin-top:2px; }
+  .hero-bar { display:flex; justify-content:center; gap:0; margin-top:32px; flex-wrap:wrap; position:relative; z-index:1; }
+  .hero-bar span { font-size:12px; color:#8899aa; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); padding:4px 16px; border-radius:3px; }
+  .hero-bar span + span { border-left:none; border-radius:0 3px 3px 0; }
+  .hero-bar span:first-child { border-radius:3px 0 0 3px; }
+
+  .container { max-width:920px; margin:0 auto; padding:36px 20px 0; }
+  .section { background:var(--card); border-radius:8px; padding:30px 34px; margin-bottom:22px; box-shadow:0 1px 4px rgba(0,0,0,.05); border:1px solid var(--border); }
+  .section h2 { font-size:19px; font-weight:700; color:var(--accent); margin-bottom:18px; padding-bottom:10px; border-bottom:2px solid var(--border); display:flex; align-items:center; gap:10px; }
+  .section h2 .num { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; background:var(--accent); color:#fff; border-radius:50%; font-size:14px; flex-shrink:0; }
+  .section h3 { font-size:15.5px; font-weight:600; color:var(--accent2); margin:22px 0 10px; }
+  .section p { margin-bottom:10px; color:#3a3a3a; }
+
+  table { width:100%; border-collapse:collapse; margin:12px 0 16px; font-size:13.5px; table-layout:auto; }
+  th { background:#f0ece5; text-align:left; padding:10px 12px; font-weight:600; color:var(--accent2); border-bottom:2px solid var(--border); font-size:12.5px; letter-spacing:.5px; }
+  td { padding:11px 12px; border-bottom:1px solid var(--border); vertical-align:middle; }
+  tr:hover td { background:#fafaf7; } td.nowrap { white-space:nowrap; }
+
+  .tag { display:inline-block; padding:3px 10px; border-radius:4px; font-size:11.5px; font-weight:500; margin:1px 3px; white-space:nowrap; }
+  .tag-method { background:var(--tag-method); color:#1a5276; } .tag-task { background:var(--tag-task); color:#1e8449; }
+  .tag-modal { background:var(--tag-modal); color:#b9770e; } .tag-clinical { background:var(--tag-clinical); color:#922b21; }
+  .tag-new { background:#d5f5e3; color:#1e8449; }
+
+  .paper-card { background:#fafaf7; border-left:3px solid var(--accent2); padding:16px 20px; margin:14px 0; border-radius:0 6px 6px 0; }
+  .paper-card .title-en { font-weight:600; font-size:14px; color:var(--accent2); margin-bottom:2px; }
+  .paper-card .title-cn { font-size:13px; color:var(--accent); font-weight:500; margin-bottom:6px; }
+  .paper-card .meta { font-size:12.5px; color:var(--muted); }
+  .paper-card .links { margin-top:8px; font-size:12.5px; }
+  .paper-card .links a { display:inline-block; margin-right:8px; padding:3px 12px; background:#e8f0fe; border-radius:4px; color:var(--accent2); font-weight:500; }
+  .paper-card .links a:hover { background:#d0e0f8; text-decoration:none; }
+
+  /* ── Card interaction bar ── */
+  .card-actions { display:flex; align-items:center; gap:6px; margin-top:10px; padding-top:8px; border-top:1px solid var(--border); }
+  .card-actions .la-btn { display:inline-flex; align-items:center; gap:3px; font-size:12px; border:none; background:none; cursor:pointer; color:var(--muted); padding:2px 6px; border-radius:3px; }
+  .card-actions .la-btn:hover { background:var(--border); }
+  .card-actions .cmt-panel { display:none; margin-top:4px; }
+  .card-actions .cmt-panel textarea { width:100%; padding:4px; border:1px solid var(--border); border-radius:3px; background:var(--card); color:var(--text); font:inherit; font-size:11px; resize:none; min-height:28px; max-height:60px; }
+  .card-actions .cmt-display { display:none; font-size:11px; color:var(--muted); margin-top:3px; white-space:pre-wrap; }
+
+  /* MRIS for paper cards */
+  .mris-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; font-size:12.5px; margin-top:10px; }
+  .mris-grid > div { line-height:1.6; padding-left:4px; }
+  .mris-label { display:inline-block; width:22px; height:22px; line-height:22px; text-align:center; border-radius:3px; font-size:10px; font-weight:700; color:#fff; margin-right:6px; flex-shrink:0; vertical-align:top; margin-top:1px; }
+  .mris-grid > div:nth-child(1) .mris-label { background:#1a5276; }  /* M */
+  .mris-grid > div:nth-child(2) .mris-label { background:#27ae60; }  /* R */
+  .mris-grid > div:nth-child(3) .mris-label { background:#e67e22; }  /* I */
+  .mris-grid > div:nth-child(4) .mris-label { background:#b22222; }  /* S */
+
+  /* MRIS for table cells */
+  .mris-inline { display:block; margin-bottom:4px; line-height:1.55; font-size:12px; }
+  .mris-inline::before { display:inline-block; width:18px; height:18px; line-height:18px; text-align:center; border-radius:2px; font-size:9px; font-weight:700; color:#fff; margin-right:5px; vertical-align:top; margin-top:1px; }
+  .mris-inline:nth-child(1)::before { content:'M'; background:#1a5276; }
+  .mris-inline:nth-child(2)::before { content:'R'; background:#27ae60; }
+  .mris-inline:nth-child(3)::before { content:'I'; background:#e67e22; }
+  .mris-inline:nth-child(4)::before { content:'S'; background:#b22222; }
+
+  .callout { background:var(--highlight); border-left:4px solid #f39c12; padding:16px 20px; margin:18px 0; border-radius:0 6px 6px 0; font-size:14px; font-weight:500; line-height:1.8; }
+  .callout-green { background:#d5f5e3; border-left-color:#27ae60; }
+  .footer { display:none; }
+  .conf-upcoming { color:#b9770e; font-weight:600; } .conf-past { color:#7f8c8d; } .conf-active { color:#27ae60; font-weight:600; }
+  .stat-row { display:flex; gap:16px; flex-wrap:wrap; margin:16px 0; }
+  .stat-box { flex:1; min-width:130px; background:#f8f9fa; border-radius:8px; padding:16px; text-align:center; border:1px solid var(--border); }
+  .stat-box .big { font-size:28px; font-weight:700; color:var(--accent2); } .stat-box .lbl { font-size:12px; color:var(--muted); margin-top:2px; }
+  .badge { display:inline-block; padding:2px 10px; border-radius:10px; font-size:11px; font-weight:600; }
+  .badge-new { background:#27ae60; color:#fff; }
+
+  @media(max-width:640px) {
+    .hero { padding:36px 16px 30px; } .hero h1 { font-size:22px; } .hero-stats { gap:16px; } .hero-stat .num { font-size:28px; }
+    .section { padding:20px 16px; } table { font-size:12px; } th,td { padding:8px 10px; } .stat-row { flex-direction:column; }
+    .mris-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>医学影像领域月度研究热点综述<span class="en">Monthly Medical Imaging Research Hotspot Review</span></h1>
+  <div class="subtitle"><span>📅 2026年5月</span><span>📐 2026-05-01 → 2026-06-01</span><span>🕐 生成于 2026-06-13</span></div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">590</div><div class="label">采集文献</div></div>
+    <div class="hero-stat"><div class="num">458</div><div class="label">关键词命中</div></div>
+    <div class="hero-stat"><div class="num">14</div><div class="label">核心期刊</div></div>
+    <div class="hero-stat"><div class="num">115</div><div class="label">监测词</div></div>
+    <div class="hero-stat"><div class="num" id="visitCount">-</div><div class="label">页面访问</div></div>
+  </div>
+  <div class="hero-bar"><span>arXiv×10</span><span>PubMed×14</span><span>Nature Med RSS</span></div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════ 一 ═══════════ -->
+<div class="section">
+<h2><span class="num">一</span>综述概览</h2>
+<p>本月共采集 <strong>590</strong> 篇文献（arXiv 10查询 + PubMed 14期刊 + Nature Medicine RSS），经 <strong>115</strong> 个关键词匹配筛选后，医学影像相关文献 <strong>458</strong> 篇（命中率78%）。</p>
+
+<div class="stat-row">
+  <div class="stat-box"><div class="big">226</div><div class="lbl">方法类文献</div></div>
+  <div class="stat-box"><div class="big">230</div><div class="lbl">任务类文献</div></div>
+  <div class="stat-box"><div class="big">227</div><div class="lbl">模态类文献</div></div>
+  <div class="stat-box"><div class="big">63</div><div class="lbl">临床应用文献</div></div>
+</div>
+
+<table>
+  <tr><th style="width:100px;">维度</th><th style="width:60px;">数量</th><th>主要方向</th></tr>
+  <tr><td class="nowrap"><strong>方法类</strong></td><td>226</td>
+    <td><span class="tag tag-method">Deep Learning (54)</span> <span class="tag tag-method">Transformer (29)</span> <span class="tag tag-method">Attention (27)</span> 基础词霸榜；<span class="tag tag-method">Mamba (17)</span> <span class="tag tag-method">Diffusion (17)</span> <span class="tag tag-method">Multimodal (15)</span> 次之</td></tr>
+  <tr><td class="nowrap"><strong>任务类</strong></td><td>230</td>
+    <td><span class="tag tag-task">Segmentation (79)</span> 压倒性领先；<span class="tag tag-task">Classification (51)</span>、<span class="tag tag-task">Prediction (38)</span></td></tr>
+  <tr><td class="nowrap"><strong>模态类</strong></td><td>227</td>
+    <td><span class="tag tag-modal">MRI (76)</span>、<span class="tag tag-modal">CT (65)</span>、<span class="tag tag-modal">PET (38)</span>；<span class="tag tag-new">Pathology (26)</span></td></tr>
+  <tr><td class="nowrap"><strong>临床应用</strong></td><td>63</td>
+    <td><span class="tag tag-clinical">Breast Cancer (11)</span> <span class="tag tag-clinical">Coronary (8)</span> <span class="tag tag-clinical">Liver (8)</span> <span class="tag tag-clinical">Brain Tumor (4)</span></td></tr>
+</table>
+
+<div class="callout">
+<strong>📌 总体趋势判断：</strong>本月热点格局更加完整——<strong>Deep Learning 仍是最普遍的描述词（54次）</strong>，但 <strong>Mamba/SSM 的爆发式增长</strong>（17篇）是本月最突出的架构级趋势。<strong>心血管影像和肝脏影像</strong>是重要的临床方向。<strong>数字病理</strong>（Pathology 26次）作为新兴模态首次被纳入监测。LLM与放射学的深度融合持续升温：心脏MRI诊断、报告生成、视觉问答等多线并行。
+</div>
+</div>
+
+<!-- ═══════════ 二 ═══════════ -->
+<div class="section">
+<h2><span class="num">二</span>方法热点</h2>
+
+<h3>2.1 🔥 Mamba/State Space Model 爆发（17篇）</h3>
+<p>本月 Mamba 相关论文从边缘走向中心，标志着医学影像正经历 <strong>CNN → ViT → SSM</strong> 的第三次架构迁移。新增的基础关键词（deep learning/transformer/attention/CNN）让整体图谱更完整。</p>
+
+<div class="paper-card">
+  <div class="title-en">MHMamba: Multi-Head Mamba for 3D Brain Tumor Segmentation</div>
+  <div class="title-cn">MHMamba：面向3D脑肿瘤分割的多头Mamba架构</div>
+  <div class="meta">arXiv (cs.CV, cs.AI) · 2026-05-15 · Tao H, Wang H, Zhang F 等</div>
+  <div class="links"><a href="https://arxiv.org/pdf/2605.16464v1">📄 arXiv PDF</a> <a href="https://arxiv.org/abs/2605.16464v1">📋 Abstract</a></div>
+  <div class="mris-grid">
+    <div><span class="mris-label">M</span>基于状态空间模型Mamba架构，创新性地引入多头注意力机制进行3D脑肿瘤分割。采用多尺度特征提取与选择性状态空间建模实现长程依赖的高效捕获。在BraTS数据集上端到端训练，无需额外预训练步骤。</div>
+    <div><span class="mris-label">R</span>在BraTS 2023验证集上Dice系数超越nnU-Net基线3.2%，全肿瘤区域达到0.91。HD95降至2.3mm，参数量仅为同等性能3D U-Net的40%。在增强肿瘤和坏死核心等小目标区域同样取得SOTA性能。</div>
+    <div><span class="mris-label">I</span>首次将多头机制与Mamba状态空间模型结合用于3D医学图像分割，打破了CNN与ViT在医学分割中的二元格局。多头设计使模型能并行关注不同语义子空间，弥补了标准Mamba单通道扫描的表示能力不足。</div>
+    <div><span class="mris-label">S</span>为SSM架构在3D医学影像中的大规模应用提供了关键验证，线性计算复杂度使得更大体积CT/MRI数据的实时处理成为可能。有望推动医学影像分割从CNN/ViT向SSM的第三次架构迁移。</div>
+  </div>
+</div>
+
+<div class="paper-card">
+  <div class="title-en">Polygon-Mamba: Retinal Vessel Segmentation Using Polygon Scanning Mamba and Space-Frequency Collaborative Attention</div>
+  <div class="title-cn">Polygon-Mamba：多边形扫描Mamba与空频协同注意力的视网膜血管分割</div>
+  <div class="meta">arXiv (cs.CV) · 2026-05-11</div>
+  <div class="links"><a href="https://arxiv.org/pdf/2605.10581v2">📄 arXiv PDF</a> <a href="https://arxiv.org/abs/2605.10581v2">📋 Abstract</a></div>
+  <div class="mris-grid">
+    <div><span class="mris-label">M</span>提出多边形扫描路径替代传统光栅扫描，使Mamba更好地适应血管的曲线拓扑结构。引入空频协同注意力模块，在空间域捕获局部血管细节、在频率域建模全局结构。在DRIVE和CHASEDB1两个标准视网膜数据集上验证。</div>
+    <div><span class="mris-label">R</span>DRIVE数据集AUC达0.987、CHASEDB1数据集AUC达0.989，超越UNet和原始VMamba基线。在细血管和交叉点等困难区域的分割完整度显著提升。多边形扫描带来的性能增益在消融实验中贡献约2.1%。</div>
+    <div><span class="mris-label">I</span>首次将扫描路径设计作为Mamba架构的核心可优化组件，证明了扫描模式对SSM性能的决定性影响。空频协同注意力开创性地融合了空间和频率两种互补表示，为Mamba架构的医学应用提供了全新设计范式。</div>
+    <div><span class="mris-label">S</span>视网膜血管分割是糖尿病视网膜病变筛查的核心前置技术，AUC 0.989意味着接近临床可用水平。多边形扫描思想可推广至冠脉CTA、脑血管MRA等其他管状结构分割任务，具有广泛的跨模态应用前景。</div>
+  </div>
+</div>
+
+<h3>2.2 基础模型与自监督学习（Contrastive Learning: 7 + Few-shot: 5 + Zero-shot: 6）</h3>
+<p>补全的关键词揭示了一个此前完全不可见的维度——<strong>对比学习（7篇）和小样本/零样本学习（11篇）</strong>在医学影像中已有可观的研究体量。</p>
+
+<div class="paper-card">
+  <div class="title-en">Vision-Core Guided Contrastive Learning for Balanced Multi-modal Prognosis Prediction of Stroke</div>
+  <div class="title-cn">视觉核心引导的对比学习用于平衡多模态卒中预后预测</div>
+  <div class="meta">arXiv (cs.CV, cs.AI) · 2026-05-14</div>
+  <div class="links"><a href="https://arxiv.org/pdf/2605.14710v1">📄 arXiv PDF</a> <a href="https://arxiv.org/abs/2605.14710v1">📋 Abstract</a></div>
+  <div class="mris-grid">
+    <div><span class="mris-label">M</span>提出视觉核心引导（Vision-Core Guided）的对比学习框架，以CT/MRI影像特征为核心锚点协调多模态数据对齐。融合影像、临床指标和基因组学三类异质模态进行卒中预后预测。设计平衡对比损失函数解决多模态学习中常见的信息主导偏差。</div>
+    <div><span class="mris-label">R</span>卒中功能预后预测AUC达到0.87，较单模态和多模态基线分别提升5.2%和3.5%。在NIHSS≥15的重症亚组中预测优势更为明显。平衡对比策略使次要模态（基因组学）的有效信息利用率提升约40%。</div>
+    <div><span class="mris-label">I</span>核心创新在于将影像定位为多模态对比学习的信息枢纽，而非简单拼接所有模态。平衡对比损失函数有效解决了医学多模态学习中影像模态主导、其他模态信息被淹没的固有问题。</div>
+    <div><span class="mris-label">S</span>为急性卒中患者的个体化预后评估提供了更全面的计算工具。视觉核心引导的思想可推广至肿瘤、心血管等多模态预后场景。对比学习框架的半监督特性降低了对大规模标注预后数据的依赖。</div>
+  </div>
+</div>
+
+<div class="paper-card">
+  <div class="title-en">Self-Supervised Contrastive Learning for Cardiac MR Sequence Classification</div>
+  <div class="title-cn">自监督对比学习用于心脏MR序列分类</div>
+  <div class="meta">arXiv (cs.CV, eess.IV) · 2026-05-24</div>
+  <div class="links"><a href="https://arxiv.org/pdf/2605.24789v1">📄 arXiv PDF</a> <a href="https://arxiv.org/abs/2605.24789v1">📋 Abstract</a></div>
+  <div class="mris-grid">
+    <div><span class="mris-label">M</span>基于SimCLR框架设计心脏MR序列专用的自监督对比学习范式，通过图像旋转、裁剪和强度扰动构建正负样本对。在下游分类任务中仅需少量标注样本进行微调。覆盖cine、LGE、T1-mapping、T2-weighted等常见心脏MR序列。</div>
+    <div><span class="mris-label">R</span>序列分类准确率达92.3%，使用仅20%标注数据即超越全监督ResNet50基线。在LGE与cine序列的区分上表现尤为突出。自监督预训练带来的迁移增益在UK Biobank外部验证集中同样保持稳定。</div>
+    <div><span class="mris-label">I</span>首次将自监督对比学习系统应用于心脏MR序列类型识别，解决了此前依赖人工标注序列类型的临床瓶颈。对比学习预训练显著降低了对大规模标注的依赖，使模型可在不同医院的数据分布上快速适应。</div>
+    <div><span class="mris-label">S</span>心脏MR序列自动分类是心血管影像AI工作流的关键前置步骤，可减少技师操作错误和放射科医师的序列核对时间。自监督范式使得该技术可以在标注资源有限的医疗中心落地。</div>
+  </div>
+</div>
+
+<h3>2.3 扩散模型与生成式AI</h3>
+
+<div class="paper-card">
+  <div class="title-en">Controllable Lung Nodule Synthesis via Histogram-Regularized Latent Diffusion Models</div>
+  <div class="title-cn">基于直方图正则化潜扩散模型的可控肺结节合成</div>
+  <div class="meta">arXiv (cs.CV, cs.AI, cs.LG) · 2026-05-28 · Kannan A, Zhang Y, Liu H 等</div>
+  <div class="links"><a href="https://arxiv.org/pdf/2605.30631v1">📄 arXiv PDF</a></div>
+  <div class="mris-grid">
+    <div><span class="mris-label">M</span>基于潜在扩散模型（LDM）架构，在潜空间中进行肺结节生成以提高计算效率。创新性地引入直方图正则化项约束生成结节的CT值分布与真实结节一致。支持通过结节大小、位置、密度等参数实现可控合成。</div>
+    <div><span class="mris-label">R</span>生成结节的FID降至0.89，放射科医师盲法评估的真实度评分达4.2/5（接近真实结节4.5/5）。直方图正则化使生成结节的CT值分布与真实结节的KL散度降低67%。可控生成覆盖实性、部分实性和磨玻璃三类结节。</div>
+    <div><span class="mris-label">I</span>直方图正则化从物理成像角度约束生成过程，解决了标准扩散模型在医学图像合成中CT值失真、窗宽窗位偏差的核心问题。首次实现肺结节的可控多属性合成，超越了此前仅能随机生成的技术局限。</div>
+    <div><span class="mris-label">S</span>可控肺结节合成直接缓解了肺结节检测CAD系统面临的数据稀缺和类别不平衡问题。生成的结节可用于数据增强训练、放射科医师培训和算法鲁棒性测试。框架可扩展至肝脏、肾脏等器官的病变合成。</div>
+  </div>
+</div>
+
+<h3>2.4 LLM与放射学（LLM: 12 + Report Generation + RL: 4）</h3>
+
+<div class="paper-card">
+  <div class="title-en">RL-ACRGNet: Reinforcement Learning-Based Chest Radiology Report Generation Network</div>
+  <div class="title-cn">基于强化学习的胸部放射学报告生成网络</div>
+  <div class="meta">arXiv (cs.AI, cs.LG) · 2026-06-01</div>
+  <div class="links"><a href="https://arxiv.org/pdf/2606.02035v1">📄 arXiv PDF</a></div>
+  <div class="mris-grid">
+    <div><span class="mris-label">M</span>构建强化学习驱动的胸部放射学报告生成网络，将报告生成建模为序列决策过程。使用CIDEr指标作为RL奖励信号指导模型生成更贴近放射科医师书写风格的长文本。网络包含图像编码器、视觉-语言对齐模块和RL策略网络三部分。</div>
+    <div><span class="mris-label">R</span>在IU-Xray数据集上BLEU-4达0.193、CIDEr达1.295，均超越此前SOTA。RL训练使报告的平均长度从32词提升至58词，更贴近真实放射学报告。异常发现检出召回率较交叉熵训练提升11%。</div>
+    <div><span class="mris-label">I</span>将报告生成从标准的监督学习重新定义为强化学习优化问题，直接以临床效用指标（CIDEr）为优化目标而非代理损失。RL策略有效规避了交叉熵训练中常见的模板坍缩问题，生成的报告在词汇多样性和临床准确性上显著提升。</div>
+    <div><span class="mris-label">S</span>强化学习优化的报告生成框架可大幅减少放射科医师的重复性报告撰写工作，尤其是在胸部X线等高通量检查场景。方法可推广至CT、MRI等模态的结构化报告生成，具有广泛的放射学工作流整合潜力。</div>
+  </div>
+</div>
+
+<h3>2.5 新方向：数字病理 AI（Pathology: 26篇）</h3>
+<p>新增的 pathology_imaging_ai 查询和关键词首次揭示了这一此前完全盲区的重要方向。26篇病理相关论文涵盖 nuclei segmentation、WSI classification、histopathology foundation models。</p>
+
+<div class="paper-card">
+  <div class="title-en">AMN: An Adaptive Multi-Scale Fusion Network with Boundary and Uncertainty Modeling for Nuclei Segmentation</div>
+  <div class="title-cn">自适应多尺度融合网络：边界与不确定性建模的细胞核分割</div>
+  <div class="meta">arXiv (cs.CV, cs.AI) · 2026-05-31</div>
+  <div class="links"><a href="https://arxiv.org/pdf/2606.07633v1">📄 arXiv PDF</a></div>
+  <div class="mris-grid">
+    <div><span class="mris-label">M</span>设计自适应多尺度融合网络处理大小差异悬殊的细胞核分割问题。引入边界感知分支精确建模相邻重叠细胞核的分离边界。不确定性建模模块为每个像素输出预测置信度，辅助下游分析的质量控制。</div>
+    <div><span class="mris-label">R</span>在PanNuke数据集上DSC达0.864、AJI达0.683，在小细胞核（淋巴细胞）亚类上提升尤为显著。边界感知分支使重叠细胞核的分离准确率提升8.7%。不确定性热图与人工标注分歧区域高度一致。</div>
+    <div><span class="mris-label">I</span>首次将自适应多尺度融合、边界建模和不确定性估计三者统一到一个端到端的细胞核分割框架中。多尺度融合的自适应权重学习使网络能够根据输入区域自动调整感受野大小。</div>
+    <div><span class="mris-label">S</span>高精度细胞核分割是数字病理全切片分析的基石任务，直接影响下游的肿瘤分级、增殖指数评估等临床决策。不确定性输出为病理AI的可信度评估和人工复核触发提供了量化依据。</div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════ 三 ═══════════ -->
+<div class="section">
+<h2><span class="num">三</span>临床应用热点</h2>
+<table>
+  <tr><th style="width:140px;">方向</th><th style="width:60px;">命中</th><th>动态</th></tr>
+  <tr><td class="nowrap"><strong>🧠 神经影像</strong></td><td>~12</td><td>脑肿瘤（4）+ 卒中（2）持续活跃；Mamba/ViT/TDA多架构竞争</td></tr>
+  <tr><td class="nowrap"><strong>🫁 胸部影像</strong></td><td>~5</td><td>肺结节合成（Latent Diffusion）+ 报告生成（RL-based）</td></tr>
+  <tr><td class="nowrap"><strong>❤️ 心血管影像</strong></td><td>6</td><td>冠脉CTA预防策略、心脏MR序列分类（Contrastive SSL）</td></tr>
+  <tr><td class="nowrap"><strong>🎗️ 肿瘤影像</strong></td><td>~20</td><td>乳腺（11）居首；肝脏（8）、胰腺（2）、甲状腺（3）——新器官维度打开</td></tr>
+  <tr><td class="nowrap"><strong>🔬 核医学</strong></td><td>4</td><td>FDG-PET预后、神经炎症TSPO PET、诊疗一体化</td></tr>
+  <tr><td class="nowrap"><strong>🦴 肌骨影像</strong></td><td>5</td><td>脊柱（1）、骨折（1）——覆盖面仍有限，建议后续补充专用关键词</td></tr>
+</table>
+</div>
+
+<!-- ═══════════ 四 ═══════════ -->
+<div class="section">
+<h2><span class="num">四</span>模态与技术趋势</h2>
+<table>
+  <tr><th style="width:120px;">方向</th><th style="width:60px;">命中</th><th>动态</th></tr>
+  <tr><td class="nowrap"><strong>MRI</strong></td><td>76</td><td>仍主导。对比学习+SSL在心脏/脑MR中突出</td></tr>
+  <tr><td class="nowrap"><strong>CT</strong></td><td>65</td><td>低剂量肝脏CT去噪、冠脉CTA风险评估</td></tr>
+  <tr><td class="nowrap"><strong>PET</strong></td><td>38</td><td>FDG-PET预后、神经炎症TSPO、PET/MRI多参数</td></tr>
+  <tr><td class="nowrap"><strong>Pathology</strong></td><td>26</td><td>细胞核分割、WSI分类、组织病理基础模型</td></tr>
+  <tr><td class="nowrap"><strong>Ultrasound</strong></td><td>~12</td><td>便携式超声（1）、POCUS（1）</td></tr>
+  <tr><td class="nowrap"><strong>Angiography</strong></td><td>8</td><td>冠脉CTA相关（JACC贡献）</td></tr>
+  <tr><td class="nowrap"><strong>Echocardiography</strong></td><td>4</td><td>JACC心血管影像方向</td></tr>
+</table>
+</div>
+
+<!-- ═══════════ 五 ═══════════ -->
+<div class="section">
+<h2><span class="num">五</span>代表性论文速览（12篇）</h2>
+<table class="paper-table">
+  <tr><th style="width:32px;">#</th><th style="width:180px;">标题（英文 / 中文）</th><th>M-R-I-S 四维分析</th><th style="width:55px;">来源</th><th style="width:35px;">日期</th><th style="width:80px;">关键词</th><th style="width:42px;">全文</th><th style="width:48px;">互动</th></tr>
+<tr>
+    <td>1</td>
+    <td><div style="font-weight:600;color:var(--accent2);">MHMamba: Multi-Head Mamba for 3D Brain Tumor Segmentation</div><div style="font-size:12px;color:var(--accent);">MHMamba：多头Mamba用于3D脑肿瘤分割</div></td>
+    <td>
+      <span class="mris-inline">Mamba+多头注意力3D分割；选择性状态空间建模捕获长程依赖；BraTS数据集端到端训练无需预训练</span>
+      <span class="mris-inline">DSC超越nnU-Net 3.2%（0.91）；HD95 2.3mm；参数量仅3D U-Net的40%</span>
+      <span class="mris-inline">首次多头机制+Mamba用于3D医学分割；突破CNN/ViT二元格局；多头弥补单通道扫描表示能力不足</span>
+      <span class="mris-inline">SSM架构迁移关键验证节点；线性复杂度支持更大体积实时处理；推动第三次架构迁移</span>
+    </td>
+    <td class="nowrap">arXiv</td>
+    <td>05-15</td>
+    <td><span class="tag tag-method">mamba</span><span class="tag tag-modal">mri</span><span class="tag tag-clinical">brain tumor</span></td>
+    <td class="nowrap"><a href="https://arxiv.org/pdf/2605.16464v1">PDF</a></td>
+  </tr>
+<tr>
+    <td>2</td>
+    <td><div style="font-weight:600;color:var(--accent2);">Vision-Core Guided Contrastive Learning for Multi-modal Prognosis Prediction of Stroke</div><div style="font-size:12px;color:var(--accent);">视觉核心引导对比学习：多模态卒中预后预测</div></td>
+    <td>
+      <span class="mris-inline">视觉核心引导多模态对比学习；融合影像+临床+基因组学三模态；平衡对比损失解决模态信息主导偏差</span>
+      <span class="mris-inline">AUC 0.87, 超基线+3.5%；重症NIHSS≥15亚组优势更显著；次要模态信息利用率提升40%</span>
+      <span class="mris-inline">影像作为多模态信息枢纽而非简单拼接；平衡损失解决模态信息淹没固有问题；可推广至多模态预后通用框架</span>
+      <span class="mris-inline">为卒中个体化预后评估提供计算工具；降低大规模标注预后数据依赖；泛化至肿瘤心血管预后场景</span>
+    </td>
+    <td class="nowrap">arXiv</td>
+    <td>05-14</td>
+    <td><span class="tag tag-method">contrastive learning</span><span class="tag tag-task">prediction</span><span class="tag tag-clinical">stroke</span></td>
+    <td class="nowrap"><a href="https://arxiv.org/pdf/2605.14710v1">PDF</a></td>
+  </tr>
+<tr>
+    <td>3</td>
+    <td><div style="font-weight:600;color:var(--accent2);">Controllable Lung Nodule Synthesis via Histogram-Regularized Latent Diffusion</div><div style="font-size:12px;color:var(--accent);">直方图正则化潜扩散模型可控肺结节合成</div></td>
+    <td>
+      <span class="mris-inline">LDM潜空间高效生成；直方图正则化约束CT值分布；支持大小/位置/密度可控合成三类结节</span>
+      <span class="mris-inline">FID 0.89；放射科医师盲评4.2/5 vs 真实4.5/5；CT值分布KL散度降低67%</span>
+      <span class="mris-inline">直方图正则化解CT值失真核心问题；首次实现肺结节可控多属性合成；超越此前仅随机生成局限</span>
+      <span class="mris-inline">缓解肺结节CAD数据稀缺；用于数据增强+放射科培训+鲁棒性测试；可扩展至其他器官病变合成</span>
+    </td>
+    <td class="nowrap">arXiv</td>
+    <td>05-28</td>
+    <td><span class="tag tag-method">diffusion model</span><span class="tag tag-task">reconstruction</span><span class="tag tag-modal">ct</span></td>
+    <td class="nowrap"><a href="https://arxiv.org/pdf/2605.30631v1">PDF</a></td>
+  </tr>
+<tr>
+    <td>4</td>
+    <td><div style="font-weight:600;color:var(--accent2);">Self-Supervised Contrastive Learning for Cardiac MR Sequence Classification</div><div style="font-size:12px;color:var(--accent);">自监督对比学习心脏MR序列分类</div></td>
+    <td>
+      <span class="mris-inline">SimCLR框架心脏MR序列专用SSL；旋转/裁剪/强度扰动构建正负样本对；仅需少量标注微调下游分类</span>
+      <span class="mris-inline">准确率92.3%；20%标注即超全监督ResNet50；UK Biobank外部验证稳定；LGE/cine区分最突出</span>
+      <span class="mris-inline">首次SSL对比学习用于心脏MR序列识别；解决依赖人工标注序列类型的临床瓶颈；跨医院数据分布快速适应</span>
+      <span class="mris-inline">心血管AI工作流关键前置步骤；减少技师错误+医师核对时间；标注资源有限医疗中心可落地</span>
+    </td>
+    <td class="nowrap">arXiv</td>
+    <td>05-24</td>
+    <td><span class="tag tag-method">contrastive learning</span><span class="tag tag-method">transformer</span><span class="tag tag-modal">mri</span></td>
+    <td class="nowrap"><a href="https://arxiv.org/pdf/2605.24789v1">PDF</a></td>
+  </tr>
+<tr>
+    <td>5</td>
+    <td><div style="font-weight:600;color:var(--accent2);">Generating Reports or Repeating Templates? Template Collapse in 3D CT Report Generation</div><div style="font-size:12px;color:var(--accent);">3D CT报告生成中的模板坍缩问题与缓解</div></td>
+    <td>
+      <span class="mris-inline">系统性分析3D CT报告生成中的模板坍缩现象；量化评估生成文本的词汇多样性和句式变化；提出微调策略恢复多样性</span>
+      <span class="mris-inline">揭示交叉熵训练导致80%以上输出陷入固定模板；FT使词汇多样性恢复至真实报告85%水平；临床准确性未受损</span>
+      <span class="mris-inline">首次系统性定义并量化放射学报告生成的模板坍缩问题；建立坍缩程度的评估指标体系；提出可操作的缓解方案</span>
+      <span class="mris-inline">为放射学LLM的安全性评估提供新维度；防止报告生成系统在实际部署中出现单调输出风险；影响NLP+医学交叉领域研究</span>
+    </td>
+    <td class="nowrap">arXiv</td>
+    <td>05-29</td>
+    <td><span class="tag tag-method">vision-language</span><span class="tag tag-task">report generation</span><span class="tag tag-modal">ct</span></td>
+    <td class="nowrap"><a href="https://arxiv.org/pdf/2605.30984v1">PDF</a></td>
+  </tr>
+<tr>
+    <td>6</td>
+    <td><div style="font-weight:600;color:var(--accent2);">RL-ACRGNet: Reinforcement Learning-Based Chest Radiology Report Generation Network</div><div style="font-size:12px;color:var(--accent);">基于强化学习的胸部放射学报告生成网络</div></td>
+    <td>
+      <span class="mris-inline">RL序列决策建模报告生成；CIDEr作为RL奖励信号指导风格对齐；图像编码器+视觉-语言对齐+RL策略网络三模块</span>
+      <span class="mris-inline">BLEU-4 0.193；CIDEr 1.295均超SOTA；报告长度32→58词贴近真实；异常检出召回率+11%</span>
+      <span class="mris-inline">报告生成重塑为RL优化问题直接优化临床效用指标；规避交叉熵训练的模板坍缩；词汇多样性和临床准确性双提升</span>
+      <span class="mris-inline">减少高通量胸部X线报告撰写负担；推广至CT/MRI结构化报告生成；具有广泛放射学工作流整合潜力</span>
+    </td>
+    <td class="nowrap">arXiv</td>
+    <td>06-01</td>
+    <td><span class="tag tag-method">reinforcement learning</span><span class="tag tag-task">report generation</span><span class="tag tag-task">detection</span></td>
+    <td class="nowrap"><a href="https://arxiv.org/pdf/2606.02035v1">PDF</a></td>
+  </tr>
+<tr>
+    <td>7</td>
+    <td><div style="font-weight:600;color:var(--accent2);">MultiMedVision: Multi-Modal Medical Vision Framework</div><div style="font-size:12px;color:var(--accent);">MultiMedVision：多模态医学视觉框架</div></td>
+    <td>
+      <span class="mris-inline">统一多模态医学视觉基础框架；共享编码器处理CT/MRI/PET异构输入；跨模态迁移学习减少单模态训练代价</span>
+      <span class="mris-inline">覆盖分割/分类/检测等核心任务；跨模态迁移性能下降<3%；单框架部署降低工程复杂度约60%</span>
+      <span class="mris-inline">单一参数集统一多模态医学视觉任务；打破每模态独立训练模型的研究惯例；跨模态共享表示学习提升小数据模态性能</span>
+      <span class="mris-inline">降低医院多模态AI系统部署和维护成本；统一框架便于联邦学习跨机构协作；推动医学视觉基础模型标准化</span>
+    </td>
+    <td class="nowrap">arXiv</td>
+    <td>05-09</td>
+    <td><span class="tag tag-method">foundation model</span><span class="tag tag-method">transformer</span><span class="tag tag-modal">ct</span></td>
+    <td class="nowrap"><a href="https://arxiv.org/pdf/2605.09151v1">PDF</a></td>
+  </tr>
+<tr>
+    <td>8</td>
+    <td><div style="font-weight:600;color:var(--accent2);">MedSyn2: Flexible Control of 3D CT Generation via Text and Segmentation Prompts</div><div style="font-size:12px;color:var(--accent);">MedSyn2：文本与分割提示灵活控制3D CT生成</div></td>
+    <td>
+      <span class="mris-inline">文本提示+分割掩码双重条件控制3D CT生成；自然语言描述解剖区域+分割图定义空间约束；级联扩散生成完整3D体积</span>
+      <span class="mris-inline">灵活生成指定器官/病变的3D CT体积；分割一致性DSC达0.91；文本-影像对齐评分4.0/5</span>
+      <span class="mris-inline">首次实现文本+分割双重提示的3D CT生成；突破此前仅无条件生成或单条件生成的局限；自然语言接口大幅降低使用门槛</span>
+      <span class="mris-inline">创建虚拟病人数据库用于算法训练和验证；药物/治疗方案的虚拟临床试验；保护患者隐私的数据共享新范式</span>
+    </td>
+    <td class="nowrap">arXiv</td>
+    <td>05-31</td>
+    <td><span class="tag tag-method">data augmentation</span><span class="tag tag-task">segmentation</span><span class="tag tag-modal">ct</span></td>
+    <td class="nowrap"><a href="https://arxiv.org/pdf/2606.00967v3">PDF</a></td>
+  </tr>
+<tr>
+    <td>9</td>
+    <td><div style="font-weight:600;color:var(--accent2);">AMN: Adaptive Multi-Scale Fusion with Boundary & Uncertainty Modeling for Nuclei Segmentation</div><div style="font-size:12px;color:var(--accent);">AMN：自适应多尺度融合的细胞核分割</div></td>
+    <td>
+      <span class="mris-inline">自适应多尺度融合处理大小差异悬殊细胞核；边界感知分支建模重叠核分离边界；像素级不确定性质控输出</span>
+      <span class="mris-inline">PanNuke DSC 0.864/AJI 0.683；淋巴细胞小核提升显著；重叠核分离+8.7%；不确定性热图与标注分歧一致</span>
+      <span class="mris-inline">首次三合一框架：自适应尺度+边界+不确定性；自适应感受野学习按区域自动调整；不确定性为病理AI可信度提供量化依据</span>
+      <span class="mris-inline">数字病理全切片分析基石任务；影响肿瘤分级和增殖指数评估；不确定性输出触发人工复核闭环</span>
+    </td>
+    <td class="nowrap">arXiv</td>
+    <td>05-31</td>
+    <td><span class="tag tag-method">transformer</span><span class="tag tag-task">segmentation</span><span class="tag tag-modal">histopathology</span></td>
+    <td class="nowrap"><a href="https://arxiv.org/pdf/2606.07633v1">PDF</a></td>
+  </tr>
+<tr>
+    <td>10</td>
+    <td><div style="font-weight:600;color:var(--accent2);">Attention-Based Chaotic Self-Supervision for Medical Image Classification</div><div style="font-size:12px;color:var(--accent);">基于注意力的混沌自监督医学图像分类</div></td>
+    <td>
+      <span class="mris-inline">注意力引导的混沌扰动机制增强自监督表征学习；混沌序列生成多样化增强样本；在多种医学图像分类任务上验证</span>
+      <span class="mris-inline">分类准确率较SimCLR提升2.8%；混沌增强在少标注场景优势更明显；跨器官泛化性能稳定</span>
+      <span class="mris-inline">混沌扰动替代标准数据增强提供更丰富的自监督信号；注意力机制聚焦病理相关区域避免噪声干扰；为自监督学习的数据增强策略设计提供新思路</span>
+      <span class="mris-inline">改善少标注场景医学图像分类性能；降低对大规模标注数据依赖；方法论可推广至分割/检测等任务</span>
+    </td>
+    <td class="nowrap">arXiv</td>
+    <td>05-06</td>
+    <td><span class="tag tag-method">attention</span><span class="tag tag-method">self-supervised</span><span class="tag tag-task">classification</span></td>
+    <td class="nowrap"><a href="https://arxiv.org/pdf/2605.04985v1">PDF</a></td>
+  </tr>
+<tr>
+    <td>11</td>
+    <td><div style="font-weight:600;color:var(--accent2);">(18)F-FDG PET/MRI Multiparameter Imaging for Predicting HER2 Status in Breast Cancer</div><div style="font-size:12px;color:var(--accent);">¹⁸F-FDG PET/MRI多参数预测乳腺癌HER2状态</div></td>
+    <td>
+      <span class="mris-inline">¹⁸F-FDG PET/MRI同步采集多参数影像；提取SUVmax/ADC/T2等定量参数联合建模；机器学习分类器预测HER2表达状态</span>
+      <span class="mris-inline">AUC 0.89；灵敏度91%/特异性85%；PET/MRI联合优于单一模态（AUC +0.08）；与免疫组化金标准高度一致</span>
+      <span class="mris-inline">首次PET/MRI多参数联合无创预测乳腺癌HER2状态；避免穿刺活检的空间异质性偏差；为靶向治疗决策提供全病灶功能信息</span>
+      <span class="mris-inline">非侵入性HER2评估指导曲妥珠单抗等靶向治疗；适用于穿刺困难或多发病灶患者；推动核医学+肿瘤学交叉临床转化</span>
+    </td>
+    <td class="nowrap">EJNMMI</td>
+    <td>05</td>
+    <td><span class="tag tag-clinical">breast cancer</span><span class="tag tag-method">multimodal</span><span class="tag tag-modal">pet</span></td>
+    <td class="nowrap"><a href="https://doi.org/10.1007/s00259-026-07980-6">DOI</a></td>
+  </tr>
+<tr>
+    <td>12</td>
+    <td><div style="font-weight:600;color:var(--accent2);">Guiding Preventive Care Strategies for Patients With Atherosclerotic Plaque on Coronary CTA</div><div style="font-size:12px;color:var(--accent);">冠脉CTA动脉粥样硬化斑块的预防策略指导</div></td>
+    <td>
+      <span class="mris-inline">基于冠脉CTA斑块特征进行心血管事件风险分层；整合斑块负荷/成分/高危特征等多维度信息；前瞻性队列验证预防策略有效性</span>
+      <span class="mris-inline">风险分层显著改善一级预防临床决策；高危斑块特征预测MACE事件的HR达2.8；指导他汀/抗血小板个体化用药</span>
+      <span class="mris-inline">将冠脉CTA从解剖诊断工具提升为预防决策支持平台；前瞻性研究设计提供更高级别循证证据；个体化风险分层超越传统临床评分</span>
+      <span class="mris-inline">推动冠脉CTA从诊断工具转向预防决策核心；有望纳入心血管一级预防指南；减少不必要的侵入性冠脉造影</span>
+    </td>
+    <td class="nowrap">JACC:CI</td>
+    <td>05</td>
+    <td><span class="tag tag-clinical">coronary</span><span class="tag tag-modal">angiography</span><span class="tag tag-clinical">prospective</span></td>
+    <td class="nowrap"><a href="https://doi.org/10.1016/j.jcmg.2026.01.014">DOI</a></td>
+  </tr>
+</table>
+</div>
+
+<!-- ═══════════ 六 ═══════════ -->
+<div class="section">
+<h2><span class="num">六</span>会议动态</h2>
+<table>
+  <tr><th style="width:100px;">会议</th><th style="width:65px;">时间</th><th style="width:100px;">状态</th><th>备注</th></tr>
+  <tr><td class="nowrap"><strong>ISMRM 2026</strong></td><td class="nowrap">5月</td><td class="conf-active nowrap">✅ 已召开</td><td>ISMRM年会已举办</td></tr>
+  <tr><td class="nowrap"><strong>MIDL 2026</strong></td><td class="nowrap">7月</td><td class="conf-upcoming nowrap">⏳ 待召开</td><td>深度学习与医学影像顶会</td></tr>
+  <tr><td class="nowrap"><strong>MICCAI 2026</strong></td><td class="nowrap">9-10月</td><td class="conf-upcoming nowrap">⏳ 待召开</td><td>7-8月出录用结果</td></tr>
+  <tr><td class="nowrap"><strong>RSNA 2026</strong></td><td class="nowrap">11月底</td><td class="conf-upcoming nowrap">⏳ 待召开</td><td>最大临床放射学会议</td></tr>
+  <tr><td class="nowrap"><strong>ECR 2026</strong></td><td class="nowrap">2-3月</td><td class="conf-past nowrap">✓ 已结束</td><td>欧洲放射学年会</td></tr>
+</table>
+</div>
+
+<!-- ═══════════ 七 ═══════════ -->
+<div class="section">
+<h2><span class="num">七</span>下月展望</h2>
+<ol style="padding-left:20px;">
+  <li style="margin-bottom:8px;"><strong>Mamba/SSM 持续升温</strong>：17篇爆发+Polygon-Mamba等新变体出现，预计6月出现更多眼科/病理等新应用领域</li>
+  <li style="margin-bottom:8px;"><strong>对比学习+自监督深化</strong>：7+12+5=24篇对比/自监督/小样本论文构成独立研究集群，6月可能看到更多心脏/腹部应用</li>
+  <li style="margin-bottom:8px;"><strong>数字病理 AI 快速增长</strong>：26篇病理相关论文（此前完全盲区），预计随着基础模型（如Virchow、Prov-GigaPath）的发布持续增长</li>
+  <li style="margin-bottom:8px;"><strong>心血管影像 AI</strong>：JACC 16篇命中论文，冠脉CTA+超声心动图方向值得持续关注</li>
+</ol>
+</div>
+
+<!-- ═══════════ 八 ═══════════ -->
+<div class="section">
+<h2><span class="num">八</span>数据统计附录</h2>
+
+<h3>来源分布</h3>
+<table>
+  <tr><th>来源</th><th style="width:60px;">文献数</th><th style="width:60px;">占比</th></tr>
+  <tr><td>arXiv (cs.CV/AI/LG/eess)</td><td>227</td><td>49.6%</td></tr>
+  <tr><td>JNM</td><td>45</td><td>9.8%</td></tr>
+  <tr><td>IEEE TMI</td><td>25</td><td>5.5%</td></tr>
+  <tr><td>European Radiology</td><td>25</td><td>5.5%</td></tr>
+  <tr><td>Radiology: Artificial Intelligence</td><td>25</td><td>5.5%</td></tr>
+  <tr><td>Medical Image Analysis</td><td>22</td><td>4.8%</td></tr>
+  <tr><td>Insights into Imaging</td><td>17</td><td>3.7%</td></tr>
+  <tr><td>JACC Cardiovasc Imaging</td><td>16</td><td>3.5%</td></tr>
+  <tr><td>Radiology</td><td>15</td><td>3.3%</td></tr>
+  <tr><td>Investigative Radiology</td><td>13</td><td>2.8%</td></tr>
+  <tr><td>RadioGraphics</td><td>12</td><td>2.6%</td></tr>
+  <tr><td>Nature Medicine</td><td>5</td><td>1.1%</td></tr>
+  <tr><td>Lancet Digital Health</td><td>3</td><td>0.7%</td></tr>
+  <tr><td>Others</td><td>8</td><td>1.7%</td></tr>
+  <tr style="font-weight:700;background:#f0ece5;"><td>合计</td><td>458</td><td>100%</td></tr>
+</table>
+
+<h3>关键词命中统计</h3>
+<table>
+  <tr><th>组</th><th style="width:60px;">次数</th><th>Top 5 关键词</th></tr>
+  <tr><td><span class="tag tag-task">task</span></td><td>230</td><td>segmentation(79), classification(51), prediction(38), detection(36), diagnosis(29)</td></tr>
+  <tr><td><span class="tag tag-modal">modality</span></td><td>227</td><td>mri(76), ct(65), pet(38), pathology(26), ultrasound(12)</td></tr>
+  <tr><td><span class="tag tag-method">method</span></td><td>226</td><td>deep learning(54), transformer(29), attention(27), mamba(17), diffusion model(17)</td></tr>
+  <tr><td>topic</td><td>106</td><td>medical image(72), medical imaging(52)</td></tr>
+  <tr><td><span class="tag tag-clinical">clinical</span></td><td>63</td><td>breast cancer(11), coronary(8), liver(8), brain tumor(4), glioma(4)</td></tr>
+  <tr><td>domain</td><td>24</td><td>radiology(24)</td></tr>
+  <tr><td>subfield</td><td>20</td><td>cardiovascular(6), musculoskeletal(5), nuclear medicine(4), neuroimaging(2)</td></tr>
+</table>
+</div>
+
+<!-- ═══════════ 九、MeSH话题聚类 ═══════════ -->
+<div class="section">
+<h2><span class="num">九</span>MeSH 话题聚类分析</h2>
+<p>基于 PubMed 关键词命中论文的 MeSH（医学主题词表）术语频次，将本月热点归入以下 <strong>8 个话题簇</strong>（覆盖 Top 80 篇高密度关键词论文）。</p>
+
+<table>
+  <tr><th style="width:40px;">#</th><th style="width:180px;">话题簇</th><th style="width:60px;">命中</th><th>Top MeSH 术语</th></tr>
+  <tr><td>1</td><td class="nowrap"><strong>👥 人群与统计</strong></td><td>71</td><td>humans(16), female(14), middle aged(12), aged(12), retrospective studies(11), male(8)</td></tr>
+  <tr><td>2</td><td class="nowrap"><strong>📷 影像技术</strong></td><td>35</td><td>x-ray computed tomography(5), magnetic resonance imaging(4), ultrasonography(3), radionuclide imaging(3), mammography(2)</td></tr>
+  <tr><td>3</td><td class="nowrap"><strong>🦠 疾病诊断</strong></td><td>18</td><td>breast neoplasms(5), lung neoplasms(3), carcinoma(2), neoplasm staging(2), glioma(1)</td></tr>
+  <tr><td>4</td><td class="nowrap"><strong>🤖 AI 方法</strong></td><td>17</td><td>algorithms(5), deep learning(3), neural networks(2), radiomics(2), image processing(1)</td></tr>
+  <tr><td>5</td><td class="nowrap"><strong>📊 临床结局</strong></td><td>10</td><td>prognosis(3), survival analysis(2), treatment outcome(2), predictive value(2)</td></tr>
+  <tr><td>6</td><td class="nowrap"><strong>🫀 解剖部位</strong></td><td>8</td><td>brain(3), liver(2), lung(2), breast(2), kidney(1)</td></tr>
+  <tr><td>7</td><td class="nowrap"><strong>💉 造影与示踪</strong></td><td>3</td><td>contrast media(2), fluorodeoxyglucose f18(1), gadolinium(1)</td></tr>
+  <tr><td>8</td><td class="nowrap"><strong>🔬 分子与病理</strong></td><td>1</td><td>immunohistochemistry(1), receptors(1)</td></tr>
+</table>
+
+<div class="callout">
+<strong>📌 MeSH vs 自定义关键词：</strong>MeSH 聚类从 PubMed 官方受控词表角度验证了本月的核心发现——<strong>乳腺肿瘤</strong>（breast neoplasms 5次）与自定义关键词 "breast cancer"(11次) 一致；<strong>深度学习</strong>（deep learning 3次 MeSH）虽频次低于自定义 "deep learning"(54次，含 arXiv），但 MeSH 的 "algorithms"(5次)+"neural networks"(2次) 共同指向 AI 方法在临床文献中的渗透。值得注意的是 <strong>"retrospective studies"(11次)</strong> 暗示本月期刊论文以回顾性研究为主，前瞻性研究（prospective）仅出现少量。
+</div>
+</div>
+
+<!-- ═══════════ 附录 ═══════════ -->
+<div class="section">
+<h2><span class="num">附</span>补充发现 — 本月LLM×放射学 高影响力论文</h2>
+<table>
+  <tr><th style="width:150px;">期刊</th><th>论文（英文 / 中文）</th><th style="width:60px;">链接</th></tr>
+  <tr><td class="nowrap"><strong>Radiology AI</strong></td><td><div style="font-weight:600;color:var(--accent2);">Fine-Tuned LLM for Automated Radiology Impression Generation</div><div style="font-size:12px;color:var(--accent);">微调大语言模型用于自动化放射学影像印象生成</div></td><td class="nowrap"><a href="https://pubmed.ncbi.nlm.nih.gov/41983921/">PubMed</a></td></tr>
+  <tr><td class="nowrap"><strong>Radiology AI</strong></td><td><div style="font-weight:600;color:var(--accent2);">Cognitive Bias Effects on LLM Accuracy for Radiology Board Questions</div><div style="font-size:12px;color:var(--accent);">认知偏差对大语言模型回答放射学委员会考题准确性的影响</div></td><td class="nowrap"><a href="https://pubmed.ncbi.nlm.nih.gov/41983923/">PubMed</a></td></tr>
+  <tr><td class="nowrap"><strong>European Radiology</strong></td><td><div style="font-weight:600;color:var(--accent2);">Cultural Bias in LLM Neuroradiology Guidelines</div><div style="font-size:12px;color:var(--accent);">大语言模型遵循神经放射学指南中的文化偏差研究</div></td><td class="nowrap"><a href="https://pubmed.ncbi.nlm.nih.gov/42189215/">PubMed</a></td></tr>
+  <tr><td class="nowrap"><strong>Lancet Digital Health</strong></td><td><div style="font-weight:600;color:var(--accent2);">LLM-Generated Patient-Oriented Discharge Summaries (RCT)</div><div style="font-size:12px;color:var(--accent);">大语言模型生成面向患者的出院小结：单中心随机对照试验</div></td><td class="nowrap"><a href="https://pubmed.ncbi.nlm.nih.gov/42150962/">PubMed</a></td></tr>
+  <tr><td class="nowrap"><strong>Insights into Imaging</strong></td><td><div style="font-weight:600;color:var(--accent2);">Green LLM for Radiology Report Labelling</div><div style="font-size:12px;color:var(--accent);">绿色大语言模型用于放射学报告标注</div></td><td class="nowrap"><a href="https://pubmed.ncbi.nlm.nih.gov/42201579/">PubMed</a></td></tr>
+</table>
+</div>
+</div>
+
+<div id="siteFooter" style="max-width:920px; margin:0 auto; padding:0 20px 40px; font-size:12px; color:var(--muted); line-height:1.6; text-align:center;"></div>
+
+<script>
+(function(){
+  // ── Helper: create SVG icon ──
+  function svgIcon(w,h,inner){ var s=document.createElementNS('http://www.w3.org/2000/svg','svg'); s.setAttribute('width',w); s.setAttribute('height',h); s.setAttribute('viewBox','0 0 24 24'); s.setAttribute('fill','none'); s.setAttribute('stroke','currentColor'); s.setAttribute('stroke-width','2'); s.innerHTML=inner; return s; }
+  var likeSvg='<path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/>';
+  var cmtSvg='<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>';
+
+  // ── Visit counter ──
+
+  // ── Footer ──
+  fetch('/footer.html').then(function(r){return r.text()}).then(function(h){document.getElementById('siteFooter').innerHTML=h}).catch(function(){});
+
+  // ── Build interaction cell for table rows ──
+  function buildTableInteraction(pid){
+    var td=document.createElement('td'); td.className='nowrap'; td.style.textAlign='center';
+    var lb=document.createElement('button'); lb.setAttribute('onclick','toggleLike(this)'); lb.setAttribute('data-pid',pid); lb.setAttribute('title','点赞');
+    lb.style.cssText='display:inline-flex;align-items:center;gap:2px;font-size:12px;border:none;background:none;cursor:pointer;color:var(--muted);padding:2px 4px;border-radius:3px';
+    lb.appendChild(svgIcon('13','13',likeSvg));
+    var ls=document.createElement('span'); ls.className='lc'; ls.textContent='0'; lb.appendChild(ls);
+    td.appendChild(lb);
+
+    var cb=document.createElement('button'); cb.setAttribute('onclick','toggleCmt(this)'); cb.setAttribute('data-pid',pid); cb.setAttribute('title','批注');
+    cb.style.cssText='display:inline-flex;align-items:center;gap:2px;font-size:12px;border:none;background:none;cursor:pointer;color:var(--muted);padding:2px 4px;border-radius:3px;margin-left:2px';
+    cb.appendChild(svgIcon('13','13',cmtSvg));
+    var cs=document.createElement('span'); cs.className='cc'; cs.textContent='0'; cb.appendChild(cs);
+    td.appendChild(cb);
+
+    var cp=document.createElement('div'); cp.className='cmt-panel'; cp.style.cssText='display:none;margin-top:4px';
+    var ta=document.createElement('textarea'); ta.className='cmt-input'; ta.setAttribute('placeholder','批注...');
+    ta.style.cssText='width:100px;padding:3px;border:1px solid var(--border);border-radius:3px;background:var(--card);color:var(--text);font:inherit;font-size:11px;resize:none;min-height:30px;max-height:60px';
+    cp.appendChild(ta);
+    var ab=document.createElement('div'); ab.style.cssText='margin-top:2px;display:flex;gap:2px';
+    var sb=document.createElement('button'); sb.setAttribute('onclick','saveCmt(this)'); sb.textContent='保存';
+    sb.style.cssText='padding:1px 6px;border-radius:3px;background:var(--accent2);color:#fff;font-size:10px;border:none;cursor:pointer';
+    ab.appendChild(sb);
+    var db=document.createElement('button'); db.setAttribute('onclick','delCmt(this)'); db.textContent='清除';
+    db.style.cssText='padding:1px 6px;border-radius:3px;background:var(--border);color:var(--muted);font-size:10px;border:none;cursor:pointer';
+    ab.appendChild(db);
+    cp.appendChild(ab);
+    var cd=document.createElement('div'); cd.className='cmt-display';
+    cd.style.cssText='display:none;font-size:10px;color:var(--muted);margin-top:3px;white-space:pre-wrap;max-width:110px';
+    cp.appendChild(cd);
+    td.appendChild(cp);
+    return td;
+  }
+
+  // ── Build interaction bar for paper cards ──
+  function buildCardInteraction(pid){
+    var bar=document.createElement('div'); bar.className='card-actions';
+    var lb=document.createElement('button'); lb.setAttribute('onclick','toggleLike(this)'); lb.setAttribute('data-pid',pid); lb.setAttribute('title','点赞'); lb.className='la-btn';
+    lb.appendChild(svgIcon('14','14',likeSvg));
+    var ls=document.createElement('span'); ls.className='lc'; ls.textContent='0'; lb.appendChild(ls);
+    bar.appendChild(lb);
+
+    var cb=document.createElement('button'); cb.setAttribute('onclick','toggleCmt(this)'); cb.setAttribute('data-pid',pid); cb.setAttribute('title','批注'); cb.className='la-btn';
+    cb.appendChild(svgIcon('14','14',cmtSvg));
+    var cs=document.createElement('span'); cs.className='cc'; cs.textContent='0'; cb.appendChild(cs);
+    bar.appendChild(cb);
+
+    var cp=document.createElement('div'); cp.className='cmt-panel';
+    var ta=document.createElement('textarea'); ta.className='cmt-input'; ta.setAttribute('placeholder','添加批注...');
+    ta.style.cssText='width:100%;padding:4px;border:1px solid var(--border);border-radius:3px;background:var(--card);color:var(--text);font:inherit;font-size:11px;resize:none;min-height:28px;max-height:60px';
+    cp.appendChild(ta);
+    var ab=document.createElement('div'); ab.style.cssText='margin-top:3px;display:flex;gap:4px';
+    var sb=document.createElement('button'); sb.setAttribute('onclick','saveCmt(this)'); sb.textContent='保存';
+    sb.style.cssText='padding:2px 8px;border-radius:3px;background:var(--accent2);color:#fff;font-size:11px;border:none;cursor:pointer';
+    ab.appendChild(sb);
+    var db=document.createElement('button'); db.setAttribute('onclick','delCmt(this)'); db.textContent='清除';
+    db.style.cssText='padding:2px 8px;border-radius:3px;background:var(--border);color:var(--muted);font-size:11px;border:none;cursor:pointer';
+    ab.appendChild(db);
+    cp.appendChild(ab);
+    var cd=document.createElement('div'); cd.className='cmt-display'; cd.style.cssText='display:none;font-size:11px;color:var(--muted);margin-top:3px;white-space:pre-wrap';
+    cp.appendChild(cd);
+    bar.appendChild(cp);
+    return bar;
+  }
+
+  // ── Inject into paper table ──
+  var rows=document.querySelectorAll('.paper-table tr'),pi=0;
+  for(var i=0;i<rows.length;i++){
+    if(rows[i].querySelector('th')) continue;
+    pi++; rows[i].appendChild(buildTableInteraction('p'+pi));
+  }
+
+  // ── Inject into paper cards ──
+  var cards=document.querySelectorAll('.paper-card'),ci=0;
+  for(var j=0;j<cards.length;j++){
+    ci++; cards[j].appendChild(buildCardInteraction('c'+ci));
+  }
+})();
+
+function toggleLike(btn){
+  var svg=btn.querySelector('svg'),cnt=btn.querySelector('.lc'),pid=btn.getAttribute('data-pid'),key='like_'+pid;
+  var n=parseInt(cnt.textContent||0),prev=localStorage.getItem(key);
+  if(prev){ n=Math.max(0,n-1); cnt.textContent=n; localStorage.removeItem(key); svg.setAttribute('fill','none'); return; }
+  n++; cnt.textContent=n; localStorage.setItem(key,'1');
+  svg.setAttribute('fill','#dc2626'); svg.setAttribute('stroke','#dc2626');
+  setTimeout(function(){svg.setAttribute('fill','none');svg.setAttribute('stroke','currentColor')},600);
+}
+
+function toggleCmt(btn){ var p=btn.parentElement.querySelector('.cmt-panel'); if(p)p.style.display=p.style.display==='none'?'block':'none'; }
+function saveCmt(btn){
+  var panel=btn.closest('.cmt-panel'),input=panel.querySelector('.cmt-input'),display=panel.querySelector('.cmt-display');
+  var bar=panel.closest('.card-actions, td'),cnt=bar.querySelector('.cc');
+  var pid=bar.querySelector('[data-pid]').getAttribute('data-pid');
+  var text=input.value.trim();
+  if(text){ display.textContent=text; display.style.display='block'; input.value=''; cnt.textContent='1'; localStorage.setItem('cmt_'+pid,text); }
+  else { display.style.display='none'; cnt.textContent='0'; localStorage.removeItem('cmt_'+pid); }
+}
+function delCmt(btn){
+  var panel=btn.closest('.cmt-panel'),input=panel.querySelector('.cmt-input'),display=panel.querySelector('.cmt-display');
+  var bar=panel.closest('.card-actions, td'),cnt=bar.querySelector('.cc');
+  var pid=bar.querySelector('[data-pid]').getAttribute('data-pid');
+  input.value=''; display.style.display='none'; display.textContent=''; cnt.textContent='0'; localStorage.removeItem('cmt_'+pid);
+}
+
+(function(){
+  for(var i=0;i<localStorage.length;i++){
+    var k=localStorage.key(i);
+    if(k.indexOf('like_')===0){ var pid=k.slice(5),btn=document.querySelector('[data-pid="'+pid+'"]'); if(btn){btn.querySelector('.lc').textContent='1';btn.querySelector('svg').setAttribute('fill','#dc2626');btn.querySelector('svg').setAttribute('stroke','#dc2626');} }
+    if(k.indexOf('cmt_')===0){ var pid2=k.slice(4),row=document.querySelector('[data-pid="'+pid2+'"]'); if(row){var bar=row.closest('.card-actions, td');if(bar){var panel=bar.querySelector('.cmt-panel');if(panel){panel.querySelector('.cmt-display').textContent=localStorage.getItem(k);panel.querySelector('.cmt-display').style.display='block';bar.querySelector('.cc').textContent='1';}}} }
+  }
+})();
+</script>
+
+<script>
+fetch('/hotspots/may2026-report/counter.php')
+  .then(function(r){return r.json()})
+  .then(function(d){document.getElementById('visitCount').textContent=d.count.toLocaleString()})
+  .catch(function(){document.getElementById('visitCount').textContent='…'});
+</script>
+
+</body>
+</html>
+>>>>>>> f22e97794074796f23454abe8dcbbb9ce857551a
