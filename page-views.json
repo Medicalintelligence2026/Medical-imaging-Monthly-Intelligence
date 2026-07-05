@@ -1,0 +1,68 @@
+{
+  "updated_at": "2026-07-05T08:58:45.694Z",
+  "views": {
+    "home": {
+      "title": "医学影像前沿研究精选看板",
+      "count": 0,
+      "paths": [
+        null,
+        null
+      ]
+    },
+    "Chineseauthor": {
+      "title": "中国学者影像TOP杂志发表分析 - 往期归档",
+      "count": 0,
+      "paths": [
+        "/Medical-imaging-Monthly-Intelligence/Chineseauthor"
+      ]
+    },
+    "Radiology": {
+      "title": "Radiology 追踪专栏",
+      "count": 0,
+      "paths": [
+        "/Medical-imaging-Monthly-Intelligence/Radiology"
+      ]
+    },
+    "hotspots": {
+      "title": "前沿热点追踪",
+      "count": 0,
+      "paths": [
+        "/Medical-imaging-Monthly-Intelligence/hotspots"
+      ]
+    },
+    "MedicalResearchSkills": {
+      "title": "医学研究 AI 技能看板",
+      "count": 0,
+      "paths": [
+        null
+      ]
+    }
+  },
+  "raw_views": {
+    "home": {
+      "path": "/Medical-imaging-Monthly-Intelligence/",
+      "title": "医学影像前沿研究精选看板",
+      "count": 0
+    },
+    "Chineseauthor": {
+      "path": "/Medical-imaging-Monthly-Intelligence/Chineseauthor",
+      "title": "中国学者影像TOP杂志发表分析 - 往期归档",
+      "count": 0
+    },
+    "Radiology": {
+      "path": "/Medical-imaging-Monthly-Intelligence/Radiology",
+      "title": "Radiology 追踪专栏",
+      "count": 0
+    },
+    "hotspots": {
+      "path": "/Medical-imaging-Monthly-Intelligence/hotspots",
+      "title": "前沿热点追踪",
+      "count": 0
+    },
+    "Medical-Research-skills": {
+      "path": "/Medical-imaging-Monthly-Intelligence/Medical-Research-skills",
+      "title": "医学研究 AI 技能看板",
+      "count": 0
+    }
+  }
+}

@@ -1,42 +1,30 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-OUTPUT_FILE="./scripts/goatcounter-raw.json"
-
-if ! command -v node >/dev/null 2>&1; then
-  echo "Error: node is required." >&2
-  exit 1
-fi
-
-if ! command -v curl >/dev/null 2>&1; then
-  echo "Error: curl is required." >&2
-  exit 1
-fi
-
-if [ -z "${GOATCOUNTER_TOKEN:-}" ]; then
-  echo "Error: GOATCOUNTER_TOKEN is not set." >&2
-  echo "Usage: GOATCOUNTER_TOKEN='your_token' bash scripts/fetch-goatcounter-stats.sh" >&2
-  exit 1
-fi
-
-# 彻底改用相对路径，避开 Windows/Linux 路径格式冲突
-SITE_URL="$(node -e "console.log(require('./scripts/goatcounter-config.json').site);")"
-
-curl --silent --show-error \
-  --header "Content-Type: application/json" \
-  --header "Authorization: Bearer ${GOATCOUNTER_TOKEN}" \
-  --get \
-  --data-urlencode "path_by_name=true" \
-  --data-urlencode "limit=100" \
-  $(node <<'NODE'
-const fs = require('fs');
-const config = JSON.parse(fs.readFileSync('./scripts/goatcounter-config.json', 'utf8'));
-for (const p of config.pages) {
-  process.stdout.write(` --data-urlencode include_paths=${JSON.stringify(p.path)}`);
+{
+  "site": "https://medicalintelligence2026.goatcounter.com",
+  "pages": [
+    {
+      "key": "home",
+      "path": "/Medical-imaging-Monthly-Intelligence/",
+      "title": "医学影像前沿研究精选看板"
+    },
+    {
+      "key": "Chineseauthor",
+      "path": "/Medical-imaging-Monthly-Intelligence/Chineseauthor",
+      "title": "中国学者影像TOP杂志发表分析 - 往期归档"
+    },
+    {
+      "key": "Radiology",
+      "path": "/Medical-imaging-Monthly-Intelligence/Radiology",
+      "title": "Radiology 追踪专栏"
+    },
+    {
+      "key": "hotspots",
+      "path": "/Medical-imaging-Monthly-Intelligence/hotspots",
+      "title": "前沿热点追踪"
+    },
+    {
+      "key": "Medical-Research-skills",
+      "path": "/Medical-imaging-Monthly-Intelligence/Medical-Research-skills",
+      "title": "医学研究 AI 技能看板"
+    }
+  ]
 }
-NODE
-) \
-  "${SITE_URL}/api/v0/stats/hits" \
-  > "$OUTPUT_FILE"
-
-echo "Saved raw GoatCounter response to: $OUTPUT_FILE"
